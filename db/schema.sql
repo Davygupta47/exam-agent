@@ -1,11 +1,10 @@
-CREATE TABLE IF NOT EXISTS students (
-    autonomy_roll_no  VARCHAR(20) NOT NULL,
-    college_roll_no   VARCHAR(20) NOT NULL UNIQUE,
-    registration_no   VARCHAR(20) NOT NULL,
-    name              VARCHAR(100) NOT NULL,
-    department        VARCHAR(10) NOT NULL,
-    created_at        TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-    PRIMARY KEY (autonomy_roll_no, registration_no)
-);
-CREATE INDEX idx_students_department ON students(department);
-CREATE INDEX idx_students_name ON students(name);
+\i db/migrations/extensions.sql
+\i db/migrations/enums.sql
+\i db/migrations/tenant_users.sql
+\i db/migrations/academic_structure.sql
+\i db/migrations/students_teachers.sql
+\i db/migrations/exam.sql
+\i db/migrations/payments.sql
+\i db/migrations/scheduling.sql
+\i db/migrations/marks_results.sql
+\i db/migrations/notifications.sql

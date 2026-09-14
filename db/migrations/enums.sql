@@ -1,0 +1,53 @@
+-- Exam registration
+CREATE TYPE registration_status AS ENUM (
+  'NOT_STARTED',
+  'STARTED',
+  'PAYMENT_PENDING',
+  'REGISTERED',
+  'VERIFIED',
+  'PAYMENT_FAILED',
+  'INELIGIBLE',
+  'CANCELLED'
+);
+
+-- Exam cycle 
+CREATE TYPE exam_cycle_status AS ENUM (
+  'DRAFT',
+  'REGISTRATION_OPEN',
+  'REGISTRATION_CLOSED',
+  'SCHEDULED',
+  'IN_PROGRESS',
+  'COMPLETED',
+  'RESULTS_PROCESSING',
+  'RESULTS_PUBLISHED',
+  'ARCHIVED'
+);
+
+-- Marks
+CREATE TYPE marks_status AS ENUM (
+  'DRAFT',
+  'UPLOADED',
+  'VALIDATION_FAILED',
+  'SUBMITTED',
+  'VERIFIED',
+  'LOCKED',
+  'PUBLISHED'
+);
+
+-- Payment
+CREATE TYPE payment_status AS ENUM (
+  'PENDING',
+  'PROCESSING',
+  'SUCCESS',
+  'FAILED',
+  'REFUNDED',
+  'MANUAL_VERIFICATION'
+);
+
+-- Exam types
+CREATE TYPE exam_type AS ENUM (
+  'END_SEMESTER',
+  'MID_SEMESTER',
+  'SUPPLEMENTARY',
+  'BACKLOG'
+);
