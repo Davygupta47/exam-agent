@@ -1,4 +1,5 @@
 teacher_id,name,initials,department,designation,mail_id
+ADMIN01,"Prof. (Dr.) Basab Chowdhury","BSC","ADMIN","Principal",basab.chowdhury@heritageit.edu
 AIML01,"Prof. (Dr.) Sujay Saha","SJS","AIML","HOD",sujay.saha@heritageit.edu
 AIML02,"Prof. (Dr.) Mohuya Byabartta Kar","MBK","AIML","Associate Professor",mohuya.byabartta@heritageit.edu
 AIML03,"Prof. (Dr.) Ritankar Mandal","RM","AIML","Assistant Professor",ritankar.mandal@heritageit.edu

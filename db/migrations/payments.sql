@@ -1,20 +1,15 @@
--- Payments
 CREATE TABLE payments (
   id                  SERIAL PRIMARY KEY,
   tenant_id           INT NOT NULL REFERENCES tenants(id),
   registration_id     INT NOT NULL REFERENCES exam_registrations(id),
   student_id          INT NOT NULL REFERENCES students(id),
-  -- Amount
   amount              NUMERIC(10,2) NOT NULL,
   status              payment_status DEFAULT 'PENDING',
-  -- Gateway
-  gateway             VARCHAR(50),          
+  gateway             VARCHAR(50),           
   gateway_order_id    VARCHAR(255),
   gateway_payment_id  VARCHAR(255),
-  -- Receipt
   receipt_number      VARCHAR(50),
   receipt_url         TEXT,
-  -- Tracking
   paid_at             TIMESTAMPTZ,
   failure_reason      TEXT,
   refund_amount       NUMERIC(10,2),

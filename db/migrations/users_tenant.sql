@@ -6,6 +6,7 @@ CREATE TABLE tenants (
   settings    JSONB DEFAULT '{}',
   created_at  TIMESTAMPTZ DEFAULT NOW()
 );
+-- Users
 CREATE TABLE users (
   id            SERIAL PRIMARY KEY,
   tenant_id     INT NOT NULL REFERENCES tenants(id),

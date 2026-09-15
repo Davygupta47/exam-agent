@@ -1,13 +1,14 @@
--- Exam rooms
+-- Rooms
 CREATE TABLE exam_rooms (
   id          SERIAL PRIMARY KEY,
   tenant_id   INT NOT NULL REFERENCES tenants(id),
-  name        VARCHAR(50) NOT NULL,       
+  name        VARCHAR(50) NOT NULL,
   building    VARCHAR(100),
   capacity    SMALLINT DEFAULT 60,
   is_active   BOOLEAN DEFAULT TRUE,
   UNIQUE(tenant_id, name)
 );
+
 
 -- Schedule
 CREATE TABLE exam_schedules (
@@ -30,14 +31,14 @@ CREATE INDEX idx_schedules_cycle ON exam_schedules(tenant_id, exam_cycle_id);
 CREATE INDEX idx_schedules_date ON exam_schedules(tenant_id, exam_date);
 
 
--- Admit-cards
+-- Admit cards 
 CREATE TABLE admit_cards (
   id                SERIAL PRIMARY KEY,
   tenant_id         INT NOT NULL REFERENCES tenants(id),
   registration_id   INT NOT NULL REFERENCES exam_registrations(id),
   student_id        INT NOT NULL REFERENCES students(id),
   exam_cycle_id     INT NOT NULL REFERENCES exam_cycles(id),
-  verification_id   VARCHAR(100) NOT NULL UNIQUE,  
+  verification_id   VARCHAR(100) NOT NULL UNIQUE,
   pdf_url           TEXT,
   is_valid          BOOLEAN DEFAULT TRUE,
   generated_at      TIMESTAMPTZ DEFAULT NOW(),

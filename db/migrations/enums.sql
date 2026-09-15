@@ -1,4 +1,4 @@
--- Exam registration
+-- Exam-registration
 CREATE TYPE registration_status AS ENUM (
   'NOT_STARTED',
   'STARTED',
@@ -10,7 +10,7 @@ CREATE TYPE registration_status AS ENUM (
   'CANCELLED'
 );
 
--- Exam cycle 
+-- Exam-cycle
 CREATE TYPE exam_cycle_status AS ENUM (
   'DRAFT',
   'REGISTRATION_OPEN',
@@ -23,7 +23,7 @@ CREATE TYPE exam_cycle_status AS ENUM (
   'ARCHIVED'
 );
 
--- Marks
+-- Marks-submission
 CREATE TYPE marks_status AS ENUM (
   'DRAFT',
   'UPLOADED',
@@ -33,8 +33,8 @@ CREATE TYPE marks_status AS ENUM (
   'LOCKED',
   'PUBLISHED'
 );
-
--- Payment
+/*
+-- Payment-states 
 CREATE TYPE payment_status AS ENUM (
   'PENDING',
   'PROCESSING',
@@ -43,11 +43,30 @@ CREATE TYPE payment_status AS ENUM (
   'REFUNDED',
   'MANUAL_VERIFICATION'
 );
-
--- Exam types
+*/
+-- Exam-type
 CREATE TYPE exam_type AS ENUM (
   'END_SEMESTER',
   'MID_SEMESTER',
   'SUPPLEMENTARY',
   'BACKLOG'
+);
+
+-- Course-type
+CREATE TYPE course_type AS ENUM (
+  'THEORY',
+  'PRACTICAL',
+  'SESSIONAL'
+);
+
+-- Elective-type
+CREATE TYPE elective_type AS ENUM (
+  'COMPULSORY',
+  'PROFESSIONAL_ELECTIVE_I',
+  'PROFESSIONAL_ELECTIVE_II',
+  'PROFESSIONAL_ELECTIVE_III',
+  'PROFESSIONAL_ELECTIVE_II_LAB',
+  'PROFESSIONAL_ELECTIVE_III_LAB',
+  'OPEN_ELECTIVE_I',
+  'OPEN_ELECTIVE_II'
 );

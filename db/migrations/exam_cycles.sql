@@ -20,8 +20,8 @@ CREATE TABLE exam_cycles (
   created_at                  TIMESTAMPTZ DEFAULT NOW(),
   updated_at                  TIMESTAMPTZ DEFAULT NOW()
 );
-
 CREATE INDEX idx_exam_cycles_status ON exam_cycles(tenant_id, status);
+
 
 CREATE TABLE exam_cycle_subjects (
   id              SERIAL PRIMARY KEY,
@@ -46,7 +46,6 @@ CREATE TABLE exam_registrations (
   updated_at            TIMESTAMPTZ DEFAULT NOW(),
   UNIQUE(tenant_id, exam_cycle_id, student_id)
 );
-
 CREATE INDEX idx_exam_reg_status ON exam_registrations(tenant_id, exam_cycle_id, status);
 
 CREATE TABLE exam_registration_subjects (

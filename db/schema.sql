@@ -1,9 +1,9 @@
 \i db/migrations/extensions.sql
 \i db/migrations/enums.sql
-\i db/migrations/tenant_users.sql
-\i db/migrations/academic_structure.sql
+\i db/migrations/users_tenant.sql
+\i db/migrations/academic.sql
 \i db/migrations/students_teachers.sql
-\i db/migrations/exam.sql
+\i db/migrations/exam_cycles.sql
 \i db/migrations/payments.sql
 \i db/migrations/scheduling.sql
 \i db/migrations/marks_results.sql

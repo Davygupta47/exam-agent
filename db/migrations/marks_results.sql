@@ -1,4 +1,4 @@
--- Marks
+-- Marks_submission
 CREATE TABLE marks_submissions (
   id              SERIAL PRIMARY KEY,
   tenant_id       INT NOT NULL REFERENCES tenants(id),
@@ -20,8 +20,6 @@ CREATE TABLE marks_submissions (
   UNIQUE(tenant_id, subject_id, exam_cycle_id)
 );
 
-
--- Student marks
 CREATE TABLE marks (
   id              SERIAL PRIMARY KEY,
   tenant_id       INT NOT NULL REFERENCES tenants(id),
@@ -37,12 +35,10 @@ CREATE TABLE marks (
   updated_at      TIMESTAMPTZ DEFAULT NOW(),
   UNIQUE(tenant_id, student_id, subject_id, exam_cycle_id)
 );
-
 CREATE INDEX idx_marks_student ON marks(tenant_id, student_id);
 CREATE INDEX idx_marks_submission ON marks(tenant_id, submission_id);
 
 
--- Marks requests
 CREATE TABLE marks_corrections (
   id              SERIAL PRIMARY KEY,
   tenant_id       INT NOT NULL REFERENCES tenants(id),
@@ -54,25 +50,20 @@ CREATE TABLE marks_corrections (
   reason          TEXT NOT NULL,
   requested_by    INT NOT NULL REFERENCES users(id),
   approved_by     INT REFERENCES users(id),
-  status          VARCHAR(20) DEFAULT 'REQUESTED',
+  status          VARCHAR(20) DEFAULT 'REQUESTED', -- REQUESTED | APPROVED | REJECTED | APPLIED
   created_at      TIMESTAMPTZ DEFAULT NOW()
 );
-
-
--- Grading
 CREATE TABLE grade_rules (
   id              SERIAL PRIMARY KEY,
   tenant_id       INT NOT NULL REFERENCES tenants(id),
   min_percentage  NUMERIC(5,2) NOT NULL,
   max_percentage  NUMERIC(5,2) NOT NULL,
-  grade           VARCHAR(5) NOT NULL,        
-  grade_point     NUMERIC(3,1) NOT NULL,      
+  grade           VARCHAR(5) NOT NULL,
+  grade_point     NUMERIC(3,1) NOT NULL,
   is_pass         BOOLEAN DEFAULT TRUE,
   created_at      TIMESTAMPTZ DEFAULT NOW()
 );
 
-
--- Results
 CREATE TABLE results (
   id              SERIAL PRIMARY KEY,
   tenant_id       INT NOT NULL REFERENCES tenants(id),
@@ -84,18 +75,15 @@ CREATE TABLE results (
   total_credits   SMALLINT,
   earned_credits  SMALLINT,
   has_backlog     BOOLEAN DEFAULT FALSE,
-  status          VARCHAR(20) DEFAULT 'DRAFT',
+  status          VARCHAR(20) DEFAULT 'DRAFT', -- DRAFT | CALCULATED | VERIFIED | PUBLISHED
   marksheet_url   TEXT,
   published_at    TIMESTAMPTZ,
   created_at      TIMESTAMPTZ DEFAULT NOW(),
   updated_at      TIMESTAMPTZ DEFAULT NOW(),
   UNIQUE(tenant_id, student_id, exam_cycle_id)
 );
-
 CREATE INDEX idx_results_cycle ON results(tenant_id, exam_cycle_id);
 
-
--- Result
 CREATE TABLE result_subjects (
   id              SERIAL PRIMARY KEY,
   tenant_id       INT NOT NULL REFERENCES tenants(id),
