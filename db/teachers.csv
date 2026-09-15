@@ -1,0 +1,13 @@
+teacher_id,name,initials,department,designation,mail_id
+AIML01,"Prof. (Dr.) Sujay Saha","SJS","AIML","HOD",sujay.saha@heritageit.edu
+AIML02,"Prof. (Dr.) Mohuya Byabartta Kar","MBK","AIML","Associate Professor",mohuya.byabartta@heritageit.edu
+AIML03,"Prof. (Dr.) Ritankar Mandal","RM","AIML","Assistant Professor",ritankar.mandal@heritageit.edu
+AIML04,"Prof. Pratik Kumar Haldar","PKH","AIML","Assistant Professor",pratik.kumarhaldar@heritageit.edu
+AIML05,"Mr. Arunava Sengupta","ASG","AIML","Technical Assistant",arunava.sengupta@heritageit.edu
+AIML06,"Ms. Shubhangini Dey","SDD","AIML","Technical Assistant",shubhangini.dey@heritageit.edu
+DS01,"Prof. (Dr.) Subhajit Datta","SD","Data Science","HOD",subhajit.datta@heritageit.edu
+DS02,"Prof. (Dr.) Nilina Bera","NB","Data Science","Assistant Professor",nilina.bera@heritageit.edu
+DS03,"Prof. Arpita Talukdar","AT","Data Science","Assistant Professor",arpita.talukdar@heritageit.edu
+DS04,"Prof. Deblina Chowdhury","DC","Data Science","Assistant Professor",deblina.chowdhury@heritageit.edu
+DS05,"Mr. Srijit Talukdar","ST","Data Science","Technical Assistant",srijit.talukdar@heritageit.edu
+DS06,"Ms. Tithi Dutta","TD","Data Science","Technical Assistant",tithi.dutta@heritageit.edu
