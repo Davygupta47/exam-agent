@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: exam_db
+    environment:
+      POSTGRES_DB: exam_management
+      POSTGRES_USER: exam_admin
+      POSTGRES_PASSWORD: exam_pass_123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d/source
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U exam_admin -d exam_management"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
