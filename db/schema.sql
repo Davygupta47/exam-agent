@@ -2,7 +2,7 @@
 \i db/migrations/enums.sql
 \i db/migrations/users_tenant.sql
 \i db/migrations/academic.sql
-\i db/migrations/students_teachers.sql
+\i db/migrations/students-teachers.sql
 \i db/migrations/exam_cycles.sql
 \i db/migrations/payments.sql
 \i db/migrations/scheduling.sql

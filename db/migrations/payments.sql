@@ -1,3 +1,4 @@
+/*
 CREATE TABLE payments (
   id                  SERIAL PRIMARY KEY,
   tenant_id           INT NOT NULL REFERENCES tenants(id),
@@ -22,3 +23,4 @@ CREATE TABLE payments (
 CREATE INDEX idx_payments_status ON payments(tenant_id, status);
 CREATE INDEX idx_payments_student ON payments(tenant_id, student_id);
 CREATE INDEX idx_payments_gateway ON payments(gateway_order_id);
+*/
