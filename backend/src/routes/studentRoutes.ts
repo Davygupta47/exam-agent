@@ -6,6 +6,7 @@ import {
   getStudentElectives,
   submitStudentElectives,
 } from '../controllers/studentController.js';
+import { getElectiveWindowStatus } from '../controllers/electiveController.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 
 const router = Router();
@@ -18,5 +19,7 @@ router.get('/profile', getStudentProfile);
 router.patch('/profile', updateStudentProfile);
 router.get('/electives', getStudentElectives);
 router.post('/electives', submitStudentElectives);
+router.get('/electives/window-status', getElectiveWindowStatus);
 
 export default router;
+

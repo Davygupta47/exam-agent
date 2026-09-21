@@ -18,6 +18,10 @@ import {
   AlertCircle,
   Copy,
   Check,
+  Clock,
+  Download,
+  Play,
+  Sparkles,
 } from "lucide-react";
 
 export default function AdminDashboardPage() {
@@ -79,6 +83,15 @@ export default function AdminDashboardPage() {
   const [formError, setFormError] = React.useState<string | null>(null);
   const [formSubmitting, setFormSubmitting] = React.useState(false);
 
+  // Elective Management state
+  const [electiveWindow, setElectiveWindow] = React.useState<any>(null);
+  const [electiveSubmitted, setElectiveSubmitted] = React.useState(0);
+  const [electiveTotal, setElectiveTotal] = React.useState(0);
+  const [electiveAllocated, setElectiveAllocated] = React.useState(0);
+  const [electiveTimeRemaining, setElectiveTimeRemaining] = React.useState(0);
+  const [electiveLoading, setElectiveLoading] = React.useState(false);
+  const [electiveMsg, setElectiveMsg] = React.useState<{ type: "success" | "error"; text: string } | null>(null);
+
   const loadData = React.useCallback(async () => {
     const meRes = await fetchApi("/auth/me");
     if (!meRes.success || !meRes.user) {
@@ -99,6 +112,16 @@ export default function AdminDashboardPage() {
 
     setLoading(false);
   }, [router]);
+
+  const loadElectiveStatus = React.useCallback(async () => {
+    const res = await fetchApi("/admin/electives/window-status?semester=5");
+    if (res.success) {
+      setElectiveWindow(res.window);
+      setElectiveSubmitted(res.submittedCount || 0);
+      setElectiveTotal(res.totalStudents || 0);
+      setElectiveAllocated(res.allocatedCount || 0);
+    }
+  }, []);
 
   const loadStudents = React.useCallback(async () => {
     const res = await fetchApi(
@@ -131,6 +154,77 @@ export default function AdminDashboardPage() {
   React.useEffect(() => {
     loadTeachers();
   }, [loadTeachers]);
+
+  React.useEffect(() => {
+    loadElectiveStatus();
+  }, [loadElectiveStatus]);
+
+  // Elective countdown timer
+  React.useEffect(() => {
+    if (!electiveWindow || electiveWindow.status !== "OPEN") {
+      setElectiveTimeRemaining(0);
+      return;
+    }
+    const update = () => {
+      const closes = new Date(electiveWindow.closes_at).getTime();
+      const remaining = Math.max(0, closes - Date.now());
+      setElectiveTimeRemaining(remaining);
+      if (remaining <= 0) loadElectiveStatus();
+    };
+    update();
+    const interval = setInterval(update, 1000);
+    return () => clearInterval(interval);
+  }, [electiveWindow, loadElectiveStatus]);
+
+  // Elective polling when window is open
+  React.useEffect(() => {
+    if (!electiveWindow || electiveWindow.status !== "OPEN") return;
+    const poll = setInterval(loadElectiveStatus, 10000); // poll every 10s
+    return () => clearInterval(poll);
+  }, [electiveWindow, loadElectiveStatus]);
+
+  const handleOpenWindow = async () => {
+    setElectiveLoading(true);
+    setElectiveMsg(null);
+    const res = await fetchApi("/admin/electives/open-window", {
+      method: "POST",
+      body: JSON.stringify({ semester: 5 }),
+    });
+    setElectiveLoading(false);
+    if (res.success) {
+      setElectiveMsg({ type: "success", text: res.message || "Window opened!" });
+      loadElectiveStatus();
+    } else {
+      setElectiveMsg({ type: "error", text: res.error || "Failed to open window" });
+    }
+  };
+
+  const handleRunAllocation = async () => {
+    setElectiveLoading(true);
+    setElectiveMsg(null);
+    const res = await fetchApi("/admin/electives/run-allocation", {
+      method: "POST",
+      body: JSON.stringify({ semester: 5 }),
+    });
+    setElectiveLoading(false);
+    if (res.success) {
+      setElectiveMsg({ type: "success", text: "Allocation completed! CSV generated." });
+      loadElectiveStatus();
+    } else {
+      setElectiveMsg({ type: "error", text: res.error || "Allocation failed" });
+    }
+  };
+
+  const handleDownloadCSV = () => {
+    window.open("/api/admin/electives/export-csv?semester=5", "_blank");
+  };
+
+  const formatElectiveTime = (ms: number) => {
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
 
   const handleCreateStudent = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -233,6 +327,96 @@ export default function AdminDashboardPage() {
         />
 
         <StatCards stats={stats} title="System Overview & Totals" />
+
+        {/* ─── Elective Management Panel ─── */}
+        <div className="mb-8 p-6 rounded-[24px] bg-white dark:bg-[#0F1538] border border-[#E4E8F5] dark:border-[#232C63] soft-shadow">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-[#0D2185] dark:text-[#4C66F5]" />
+              <h2 className="text-base font-semibold text-[#0E1330] dark:text-[#EAEDFB]">
+                Elective Allocation Management
+              </h2>
+              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300">
+                TEST MODE
+              </span>
+            </div>
+
+            {/* Live countdown */}
+            {electiveWindow?.status === "OPEN" && electiveTimeRemaining > 0 && (
+              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#0D2185]/10 to-[#4C66F5]/10 dark:from-[#4C66F5]/20 dark:to-[#6178F7]/20 border border-[#0D2185]/20 dark:border-[#4C66F5]/30">
+                <Clock className="w-4 h-4 text-[#0D2185] dark:text-[#4C66F5] animate-pulse" />
+                <span className="text-sm font-bold text-[#0D2185] dark:text-[#4C66F5] tabular-nums">
+                  {formatElectiveTime(electiveTimeRemaining)}
+                </span>
+                <span className="text-xs text-[#6B7194] dark:text-[#8C95C6]">remaining</span>
+              </div>
+            )}
+          </div>
+
+          {electiveMsg && (
+            <div className={`p-3 rounded-xl text-xs flex items-center gap-2 mb-4 ${
+              electiveMsg.type === "success"
+                ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                : "bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800"
+            }`}>
+              {electiveMsg.type === "success" ? <CheckCircle2 className="w-4 h-4" /> : <AlertCircle className="w-4 h-4" />}
+              <span>{electiveMsg.text}</span>
+            </div>
+          )}
+
+          {/* Stats Row */}
+          <div className="grid grid-cols-3 gap-4 mb-5">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-[#E4E8F5] dark:border-[#232C63]">
+              <p className="text-[11px] font-medium text-[#6B7194] dark:text-[#8C95C6] mb-1">Window Status</p>
+              <p className="text-sm font-bold text-[#0E1330] dark:text-[#EAEDFB]">
+                {electiveWindow?.status === "OPEN" ? "🟢 Open" : electiveWindow?.status === "ALLOCATED" ? "✅ Allocated" : electiveWindow?.status === "CLOSED" ? "🟡 Closed" : "⚪ Not Started"}
+              </p>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-[#E4E8F5] dark:border-[#232C63]">
+              <p className="text-[11px] font-medium text-[#6B7194] dark:text-[#8C95C6] mb-1">Preferences Submitted</p>
+              <p className="text-sm font-bold text-[#0E1330] dark:text-[#EAEDFB]">
+                {electiveSubmitted} <span className="text-xs font-normal text-[#6B7194]">/ {electiveTotal} students</span>
+              </p>
+            </div>
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-[#E4E8F5] dark:border-[#232C63]">
+              <p className="text-[11px] font-medium text-[#6B7194] dark:text-[#8C95C6] mb-1">Students Allocated</p>
+              <p className="text-sm font-bold text-[#0E1330] dark:text-[#EAEDFB]">{electiveAllocated}</p>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <button
+              type="button"
+              onClick={handleOpenWindow}
+              disabled={electiveLoading || electiveWindow?.status === "OPEN"}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-[#0D2185] hover:bg-[#0A1A6B] dark:bg-[#4C66F5] dark:hover:bg-[#6178F7] text-white shadow-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Clock className="w-3.5 h-3.5" />
+              <span>Open 5-min Window</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleRunAllocation}
+              disabled={electiveLoading || (!electiveWindow || electiveWindow.status === "ALLOCATED")}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Play className="w-3.5 h-3.5" />
+              <span>Run Allocation Now</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleDownloadCSV}
+              disabled={electiveWindow?.status !== "ALLOCATED"}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white dark:bg-[#1A2255] hover:bg-slate-50 dark:hover:bg-[#232C63] border border-[#E4E8F5] dark:border-[#232C63] text-[#0E1330] dark:text-[#EAEDFB] shadow-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Download test.csv</span>
+            </button>
+          </div>
+        </div>
 
         {/* Action Header & Tabs */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">

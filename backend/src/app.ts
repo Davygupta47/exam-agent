@@ -10,6 +10,7 @@ import authRoutes from './routes/authRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 import facultyRoutes from './routes/facultyRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import electiveRoutes from './routes/electiveRoutes.js';
 import avatarRoutes from './routes/avatarRoutes.js';
 
 export const app = express();
@@ -48,6 +49,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/faculty', facultyRoutes);
+app.use('/api/admin/electives', electiveRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/me', avatarRoutes);
 

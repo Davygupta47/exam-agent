@@ -176,6 +176,16 @@ export async function getStudentElectives(req: Request, res: Response, next: Nex
 
     const { id: studentId, tenant_id, department_id, current_semester } = studentRes.rows[0];
 
+    // Check for active elective window
+    const windowRes = await query(
+      `SELECT id, opens_at, closes_at, status
+       FROM elective_windows
+       WHERE tenant_id = $1 AND semester = $2
+       ORDER BY created_at DESC LIMIT 1`,
+      [tenant_id, current_semester]
+    );
+    const electiveWindow = windowRes.rows[0] || null;
+
     // Fetch available electives for this department and semester
     const electivesRes = await query(
       `SELECT sub.id, sub.code, sub.name, sub.course_type, sub.elective_type, sub.credits,
@@ -205,10 +215,22 @@ export async function getStudentElectives(req: Request, res: Response, next: Nex
       [tenant_id, studentId, current_semester]
     );
 
+    // Fetch allocation result if it exists
+    const allocationRes = await query(
+      `SELECT ea.elective_type, ea.preference_rank, ea.allocated_at,
+              sub.id as subject_id, sub.code as subject_code, sub.name as subject_name, sub.credits
+       FROM elective_allocations ea
+       JOIN subjects sub ON sub.id = ea.subject_id
+       WHERE ea.tenant_id = $1 AND ea.student_id = $2 AND ea.semester = $3`,
+      [tenant_id, studentId, current_semester]
+    );
+
     return res.json({
       success: true,
       availableElectives: electivesRes.rows,
       submittedPreferences: prefsRes.rows,
+      allocations: allocationRes.rows,
+      electiveWindow: electiveWindow,
       semester: current_semester,
     });
   } catch (err) {
@@ -231,11 +253,32 @@ export async function submitStudentElectives(req: Request, res: Response, next: 
       return res.status(404).json({ success: false, error: 'Student record not found' });
     }
 
-    const { id: studentId, tenant_id } = studentRes.rows[0];
+    const { id: studentId, tenant_id, current_semester } = studentRes.rows[0];
+
+    // Check that elective window is currently open
+    const windowRes = await client.query(
+      `SELECT id, status, closes_at
+       FROM elective_windows
+       WHERE tenant_id = $1 AND semester = $2
+       ORDER BY created_at DESC LIMIT 1`,
+      [tenant_id, current_semester]
+    );
+
+    if (windowRes.rows.length === 0) {
+      return res.status(400).json({ success: false, error: 'No elective window is currently open.' });
+    }
+
+    const window = windowRes.rows[0];
+    const now = new Date();
+    const closesAt = new Date(window.closes_at);
+
+    if (window.status !== 'OPEN' || now > closesAt) {
+      return res.status(400).json({ success: false, error: 'The elective preference window has closed. Preferences can no longer be submitted.' });
+    }
 
     await client.query('BEGIN');
 
-    // Save or update preferences
+    // Save or update preferences (NO direct enrollment — allocation happens after deadline)
     await client.query(
       `INSERT INTO elective_preferences (tenant_id, student_id, semester, elective_type, pref_1_id, pref_2_id, pref_3_id, status)
        VALUES ($1, $2, $3, $4::elective_type, $5, $6, $7, 'SUBMITTED')
@@ -248,19 +291,11 @@ export async function submitStudentElectives(req: Request, res: Response, next: 
       [tenant_id, studentId, validated.semester, validated.elective_type, validated.pref_1_id, validated.pref_2_id, validated.pref_3_id]
     );
 
-    // Also directly enroll the preferred elective in student_subjects if capacity is available
-    await client.query(
-      `INSERT INTO student_subjects (tenant_id, student_id, subject_id, is_elective, opted_at)
-       VALUES ($1, $2, $3, TRUE, NOW())
-       ON CONFLICT (tenant_id, student_id, subject_id) DO NOTHING`,
-      [tenant_id, studentId, validated.pref_1_id]
-    );
-
     await client.query('COMMIT');
 
     return res.json({
       success: true,
-      message: 'Elective preferences submitted successfully and enrolled.',
+      message: 'Elective preferences recorded successfully. Allocation will happen after the deadline.',
     });
   } catch (err) {
     await client.query('ROLLBACK');

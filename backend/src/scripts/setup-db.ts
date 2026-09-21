@@ -4,6 +4,7 @@ import pg from 'pg';
 import { parse } from 'csv-parse/sync';
 import bcrypt from 'bcryptjs';
 import { env } from '../config/env.js';
+import { ELECTIVE_CONFIG } from '../config/electiveConfig.js';
 
 const { Client } = pg;
 
@@ -90,6 +91,7 @@ async function run() {
     'marks_results.sql',
     'notifications.sql',
     'profile_extras.sql',
+    'elective_window.sql',
   ];
 
     for (const file of migrationFiles) {
@@ -328,7 +330,7 @@ async function run() {
     ON CONFLICT (tenant_id, student_id, subject_id) DO NOTHING;
 
     INSERT INTO elective_capacities (tenant_id, subject_id, semester, capacity)
-    SELECT 1, id, semester, 26
+    SELECT 1, id, semester, ${ELECTIVE_CONFIG.PE_CAPACITY}
     FROM subjects
     WHERE tenant_id = 1
       AND elective_type IN ('PROFESSIONAL_ELECTIVE_I', 'PROFESSIONAL_ELECTIVE_II')
@@ -336,7 +338,7 @@ async function run() {
     ON CONFLICT (tenant_id, subject_id, semester) DO NOTHING;
 
     INSERT INTO elective_capacities (tenant_id, subject_id, semester, capacity)
-    SELECT 1, id, semester, 50
+    SELECT 1, id, semester, ${ELECTIVE_CONFIG.OE_CAPACITY}
     FROM subjects
     WHERE tenant_id = 1
       AND elective_type IN ('OPEN_ELECTIVE_I', 'OPEN_ELECTIVE_II')
