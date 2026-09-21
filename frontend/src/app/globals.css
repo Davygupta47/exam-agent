@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, :where(.dark *)));
+
+@layer base {
+  :root {
+    /* Refined, crisp Light Mode */
+    --bg: #F8FAFC;
+    --surface: #FFFFFF;
+    --surface-raised: #FFFFFF;
+    --surface-muted: #F1F5F9;
+    --border: #E2E8F0;
+    --ink: #0F172A;
+    --ink-muted: #64748B;
+    --primary: #0D2185;
+    --primary-hover: #081454;
+    --primary-fg: #FFFFFF;
+    --tint: #EEF4FF;
+    --tint-ink: #1E3A8A;
+    --sidebar-gradient: linear-gradient(180deg, #1E2B63 0%, #0D163A 100%);
+    --sidebar-ink: #94A3B8;
+    --sidebar-active: #FFFFFF;
+    --banner: linear-gradient(115deg, #0A174E 0%, #0D2185 55%, #1E3A8A 100%);
+    --success: #10B981;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+    --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 8px 24px -4px rgba(15, 23, 42, 0.05);
+  }
+
+  .dark {
+    /* Sleek Deep Space Dark Mode */
+    --bg: #070B1E;
+    --surface: #0E1535;
+    --surface-raised: #141D45;
+    --surface-muted: #182252;
+    --border: #1E2B63;
+    --ink: #F1F5F9;
+    --ink-muted: #94A3B8;
+    --primary: #4C66F5;
+    --primary-hover: #6178F7;
+    --primary-fg: #FFFFFF;
+    --tint: #162052;
+    --tint-ink: #DDE3FF;
+    --sidebar-gradient: linear-gradient(180deg, #162052 0%, #080D28 100%);
+    --sidebar-ink: #94A3B8;
+    --sidebar-active: #FFFFFF;
+    --banner: linear-gradient(115deg, #070D28 0%, #0D1C5C 55%, #182B78 100%);
+    --success: #34D399;
+    --warning: #FBBF24;
+    --danger: #F87171;
+    --card-shadow: none;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Custom utilities */
+.bg-page { background-color: var(--bg); }
+.bg-surface { background-color: var(--surface); }
+.bg-surface-raised { background-color: var(--surface-raised); }
+.bg-surface-muted { background-color: var(--surface-muted); }
+
+.text-ink { color: var(--ink); }
+.text-ink-muted { color: var(--ink-muted); }
+.text-primary-color { color: var(--primary); }
+
+.border-subtle { border-color: var(--border); }
+.border-primary-accent { border-color: var(--primary); }
+
+.bg-primary-main { background-color: var(--primary); }
+.bg-primary-hover:hover { background-color: var(--primary-hover); }
+
+.bg-tint { background-color: var(--tint); }
+.text-tint-ink { color: var(--tint-ink); }
+
+.sidebar-gradient {
+  background: var(--sidebar-gradient);
+}
+
+.banner-gradient {
+  background: var(--banner);
+}
+
+.soft-shadow {
+  box-shadow: var(--card-shadow);
+}

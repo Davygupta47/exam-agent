@@ -3,3 +3,8 @@ plan1.1.md
 Architecture
 db/migrations/notifications.sql
 db/migrations/payments.sql
+/.agents/
+/docs
+POSTGRES_SETUP.md
+README.md
+agent.md
