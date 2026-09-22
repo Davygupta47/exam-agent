@@ -256,10 +256,10 @@ async function run() {
     }
   }
 
-  // Also ensure default admin user
+  // Also ensure default admin user (basab.chowdhury@heritageit.edu is the Principal/Admin)
   await client.query(
     `INSERT INTO users (tenant_id, email, password_hash, full_name, role, is_active)
-     VALUES (1, 'admin@heritageit.edu', $1, 'System Administrator', 'super_admin', TRUE)
+     VALUES (1, 'basab.chowdhury@heritageit.edu', $1, 'Prof. (Dr.) Basab Chowdhury', 'super_admin', TRUE)
      ON CONFLICT (tenant_id, email) DO UPDATE SET password_hash = $1`,
     [adminPasswordHash]
   );
@@ -279,9 +279,12 @@ async function run() {
       const dept = s.Department || s.department;
       const gpa = s.Second_Year_GPA || s.second_year_gpa;
 
+      const mailId = s.Mail_Id || s.mail_id;
+
       if (!collegeRoll || !name) continue;
 
-      const email = `${collegeRoll}@heritageit.edu`.toLowerCase();
+      // Use email from CSV (Mail_Id column) for login
+      const email = mailId ? mailId.toLowerCase().trim() : `${collegeRoll}@heritageit.edu`.toLowerCase();
       const deptId = dept && dept.trim().toUpperCase() === 'DATA SCIENCE' ? 2 : 1;
       const progId = deptId === 2 ? 2 : 1;
 

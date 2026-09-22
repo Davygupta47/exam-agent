@@ -14,6 +14,8 @@ export interface AuthUser {
   teacher_id?: number | null;
   roll_no?: string | null;
   teacher_code?: string | null;
+  designation?: string | null;
+  department_id?: number | null;
 }
 
 declare global {
@@ -37,7 +39,8 @@ export async function requireAuth(req: Request, res: Response, next: NextFunctio
     const userRes = await query(
       `SELECT u.id, u.tenant_id, u.email, u.full_name, u.role, u.avatar_url,
               s.id as student_id, s.college_roll_no as roll_no, s.photo_url as student_photo,
-              t.id as teacher_id, t.teacher_code, t.photo_url as teacher_photo
+              t.id as teacher_id, t.teacher_code, t.photo_url as teacher_photo,
+              t.designation, t.department_id
        FROM users u
        LEFT JOIN students s ON s.user_id = u.id
        LEFT JOIN teachers t ON t.user_id = u.id
@@ -61,6 +64,8 @@ export async function requireAuth(req: Request, res: Response, next: NextFunctio
       teacher_id: row.teacher_id || null,
       roll_no: row.roll_no || null,
       teacher_code: row.teacher_code || null,
+      designation: row.designation || null,
+      department_id: row.department_id || null,
     };
 
     next();

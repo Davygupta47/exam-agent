@@ -19,27 +19,29 @@ export async function login(req: Request, res: Response, next: NextFunction) {
                u.avatar_url, s.id as student_id, s.college_roll_no as roll_no, s.photo_url as student_photo
         FROM users u
         JOIN students s ON s.user_id = u.id
-        WHERE (LOWER(s.college_roll_no) = LOWER($1) OR LOWER(s.autonomy_roll_no) = LOWER($1) OR LOWER(u.email) = LOWER($1))
+        WHERE (LOWER(u.email) = LOWER($1) OR LOWER(s.email) = LOWER($1) OR LOWER(s.college_roll_no) = LOWER($1) OR LOWER(s.autonomy_roll_no) = LOWER($1))
           AND u.role = 'student'
       `;
       params = [identifier.trim()];
     } else if (role === 'faculty') {
       userQuery = `
         SELECT u.id, u.tenant_id, u.email, u.password_hash, u.full_name, u.role, u.is_active,
-               u.avatar_url, t.id as teacher_id, t.teacher_code, t.photo_url as teacher_photo
+               u.avatar_url, t.id as teacher_id, t.teacher_code, t.photo_url as teacher_photo,
+               t.designation, t.department_id
         FROM users u
         JOIN teachers t ON t.user_id = u.id
-        WHERE (LOWER(t.teacher_code) = LOWER($1) OR LOWER(u.email) = LOWER($1))
+        WHERE (LOWER(u.email) = LOWER($1) OR LOWER(t.email) = LOWER($1) OR LOWER(t.teacher_code) = LOWER($1))
           AND u.role IN ('teacher', 'hod', 'faculty')
       `;
       params = [identifier.trim()];
     } else if (role === 'admin') {
       userQuery = `
         SELECT u.id, u.tenant_id, u.email, u.password_hash, u.full_name, u.role, u.is_active,
-               u.avatar_url, t.id as teacher_id, t.teacher_code
+               u.avatar_url, t.id as teacher_id, t.teacher_code,
+               t.designation, t.department_id
         FROM users u
         LEFT JOIN teachers t ON t.user_id = u.id
-        WHERE (LOWER(u.email) = LOWER($1) OR LOWER(t.teacher_code) = LOWER($1))
+        WHERE (LOWER(u.email) = LOWER($1) OR LOWER(t.email) = LOWER($1) OR LOWER(t.teacher_code) = LOWER($1))
           AND u.role IN ('super_admin', 'exam_controller', 'admin')
       `;
       params = [identifier.trim()];
@@ -47,12 +49,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
 
     const result = await query(userQuery, params);
 
-    const errorMessage =
-      role === 'student'
-        ? 'Roll number or password is incorrect'
-        : role === 'faculty'
-        ? 'Faculty ID or password is incorrect'
-        : 'Email or password is incorrect';
+    const errorMessage = 'Email or password is incorrect';
 
     if (result.rows.length === 0) {
       return res.status(401).json({ success: false, error: errorMessage });
@@ -102,6 +99,8 @@ export async function login(req: Request, res: Response, next: NextFunction) {
         teacher_code: user.teacher_code || null,
         student_id: user.student_id || null,
         teacher_id: user.teacher_id || null,
+        designation: user.designation || null,
+        department_id: user.department_id || null,
       },
     });
   } catch (err) {

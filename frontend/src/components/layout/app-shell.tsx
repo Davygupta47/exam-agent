@@ -22,7 +22,7 @@ export function AppShell({ children, user, role = "student", subtitle }: AppShel
       <div className="h-screen w-screen overflow-hidden bg-page flex flex-row">
         {/* Fixed Desktop Sidebar (>= 1024px) */}
         <div className="hidden lg:flex flex-shrink-0 h-screen z-30 select-none">
-          <Sidebar role={role} />
+          <Sidebar role={role} user={user} />
         </div>
 
         {/* Mobile Drawer (< 1024px) */}
@@ -33,7 +33,7 @@ export function AppShell({ children, user, role = "student", subtitle }: AppShel
               onClick={() => setMobileMenuOpen(false)}
             />
             <div className="relative flex-1 max-w-xs w-full flex flex-col z-50">
-              <Sidebar role={role} onCloseMobile={() => setMobileMenuOpen(false)} />
+              <Sidebar role={role} user={user} onCloseMobile={() => setMobileMenuOpen(false)} />
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}

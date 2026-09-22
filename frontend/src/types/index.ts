@@ -10,6 +10,8 @@ export interface User {
   teacher_code?: string | null;
   student_id?: number | null;
   teacher_id?: number | null;
+  designation?: string | null;
+  department_id?: number | null;
 }
 
 export interface StudentProfile {

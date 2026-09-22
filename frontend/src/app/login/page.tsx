@@ -29,19 +29,14 @@ function LoginForm() {
     }
   }, [roleParam]);
 
-  const identifierLabel =
-    role === "student"
-      ? "College Roll Number"
-      : role === "faculty"
-      ? "Teacher Code or Email"
-      : "Admin Email or ID";
+  const identifierLabel = "Email Address";
 
   const identifierPlaceholder =
     role === "student"
-      ? "e.g. 2310018001"
+      ? "e.g. aakash.deep.aiml27@heritageit.edu.in"
       : role === "faculty"
-      ? "e.g. AIML01"
-      : "e.g. admin@heritageit.edu";
+      ? "e.g. sujay.saha@heritageit.edu"
+      : "e.g. basab.chowdhury@heritageit.edu";
 
   const handleRoleChange = (newRole: "student" | "faculty" | "admin") => {
     setRole(newRole);
@@ -121,9 +116,9 @@ function LoginForm() {
 
         <div className="relative z-10 pt-8 border-t border-white/10 text-xs text-[#8C97D6]">
           <p className="font-medium text-white mb-1">Testing Credentials:</p>
-          <p>• Student: 2310018001 / Student@123</p>
-          <p>• Faculty: AIML01 / Teacher@123</p>
-          <p>• Admin: admin@heritageit.edu / Admin@123</p>
+          <p>• Student: aakash.deep.aiml27@heritageit.edu.in / Student@123</p>
+          <p>• Faculty (HOD): sujay.saha@heritageit.edu / Teacher@123</p>
+          <p>• Admin: basab.chowdhury@heritageit.edu / Admin@123</p>
         </div>
       </div>
 

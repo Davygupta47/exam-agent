@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+
 import { env } from './config/env.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { apiLimiter } from './middleware/rateLimiter.js';
@@ -12,6 +13,7 @@ import facultyRoutes from './routes/facultyRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import electiveRoutes from './routes/electiveRoutes.js';
 import avatarRoutes from './routes/avatarRoutes.js';
+import hodRoutes from './routes/hodRoutes.js';
 
 export const app = express();
 
@@ -51,6 +53,7 @@ app.use('/api/student', studentRoutes);
 app.use('/api/faculty', facultyRoutes);
 app.use('/api/admin/electives', electiveRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/hod', hodRoutes);
 app.use('/api/me', avatarRoutes);
 
 // Error Handling Middleware

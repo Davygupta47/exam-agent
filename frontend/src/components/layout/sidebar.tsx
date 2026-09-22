@@ -18,16 +18,19 @@ import {
   UserCheck,
   User,
   Settings,
+  Upload,
 } from "lucide-react";
 import { useComingSoon } from "@/components/ui/coming-soon-modal";
 import { fetchApi } from "@/lib/api";
+import { User as UserType } from "@/types";
 
 interface SidebarProps {
   role?: "student" | "faculty" | "admin";
+  user?: UserType | null;
   onCloseMobile?: () => void;
 }
 
-export function Sidebar({ role = "student", onCloseMobile }: SidebarProps) {
+export function Sidebar({ role = "student", user, onCloseMobile }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { showComingSoon } = useComingSoon();
@@ -52,8 +55,12 @@ export function Sidebar({ role = "student", onCloseMobile }: SidebarProps) {
   const facultyNavItems = [
     { label: "Dashboard", href: "/faculty", icon: LayoutDashboard, isReal: true },
     { label: "Profile", href: "/faculty/profile", icon: User, isReal: true },
+    ...(user?.designation === 'HOD' ? [
+      { label: "Teacher Allocation", href: "/faculty/teacher-allocation", icon: Users, isReal: true },
+    ] : []),
     { label: "Schedule", icon: Calendar, isReal: false },
     { label: "Course Notices", icon: Bell, isReal: false },
+    { label: "Upload Answers", icon: Upload, isReal: false },
   ];
 
   const adminNavItems = [
@@ -66,8 +73,8 @@ export function Sidebar({ role = "student", onCloseMobile }: SidebarProps) {
     role === "faculty"
       ? facultyNavItems
       : role === "admin"
-      ? adminNavItems
-      : studentNavItems;
+        ? adminNavItems
+        : studentNavItems;
 
   return (
     <aside className="w-64 h-[calc(100vh-2rem)] my-4 ml-4 rounded-[28px] sidebar-gradient text-white flex flex-col justify-between p-6 shadow-2xl flex-shrink-0 select-none overflow-hidden">
@@ -104,11 +111,10 @@ export function Sidebar({ role = "student", onCloseMobile }: SidebarProps) {
                   key={item.label}
                   href={item.href}
                   onClick={onCloseMobile}
-                  className={`flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-medium transition-all ${
-                    isActive
+                  className={`flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-medium transition-all ${isActive
                       ? "bg-white/15 text-white font-semibold shadow-sm backdrop-blur-sm"
                       : "text-[#8C97D6] hover:text-white hover:bg-white/10"
-                  }`}
+                    }`}
                 >
                   <Icon className={`w-5 h-5 ${isActive ? "text-white" : "text-[#8C97D6]"}`} />
                   <span>{item.label}</span>
