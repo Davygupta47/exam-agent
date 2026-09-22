@@ -33,10 +33,10 @@ function LoginForm() {
 
   const identifierPlaceholder =
     role === "student"
-      ? "e.g. aakash.deep.aiml27@heritageit.edu.in"
+      ? "[EMAIL_ADDRESS]"
       : role === "faculty"
-      ? "e.g. sujay.saha@heritageit.edu"
-      : "e.g. basab.chowdhury@heritageit.edu";
+        ? "[EMAIL_ADDRESS]"
+        : "[EMAIL_ADDRESS]";
 
   const handleRoleChange = (newRole: "student" | "faculty" | "admin") => {
     setRole(newRole);
@@ -138,33 +138,30 @@ function LoginForm() {
               <button
                 type="button"
                 onClick={() => handleRoleChange("student")}
-                className={`py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
-                  role === "student"
-                    ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
-                    : "text-ink-muted hover:text-ink"
-                }`}
+                className={`py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${role === "student"
+                  ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
+                  : "text-ink-muted hover:text-ink"
+                  }`}
               >
                 Student
               </button>
               <button
                 type="button"
                 onClick={() => handleRoleChange("faculty")}
-                className={`py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
-                  role === "faculty"
-                    ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
-                    : "text-ink-muted hover:text-ink"
-                }`}
+                className={`py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${role === "faculty"
+                  ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
+                  : "text-ink-muted hover:text-ink"
+                  }`}
               >
                 Faculty
               </button>
               <button
                 type="button"
                 onClick={() => handleRoleChange("admin")}
-                className={`py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
-                  role === "admin"
-                    ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
-                    : "text-ink-muted hover:text-ink"
-                }`}
+                className={`py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${role === "admin"
+                  ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
+                  : "text-ink-muted hover:text-ink"
+                  }`}
               >
                 Admin
               </button>
