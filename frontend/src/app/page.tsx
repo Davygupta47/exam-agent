@@ -12,16 +12,15 @@ import {
   GraduationCap,
   BookOpen,
   Users,
-  CheckCircle2,
   Cpu,
   Database,
   Lock,
-  ChevronRight,
-  Command,
 } from "lucide-react";
 
 export default function LandingPage() {
-  const [selectedRole, setSelectedRole] = React.useState<"student" | "faculty" | "admin">("student");
+  const [selectedRole, setSelectedRole] = React.useState<
+    "student" | "faculty" | "admin"
+  >("student");
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#070B1E] text-[#0F172A] dark:text-[#F1F5F9] selection:bg-[#0D2185] selection:text-white dark:selection:bg-[#4C66F5] overflow-x-hidden">
@@ -40,13 +39,22 @@ export default function LandingPage() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-6 text-xs font-medium text-[#64748B] dark:text-[#94A3B8]">
-            <a href="#macbook-preview" className="hover:text-[#0F172A] dark:hover:text-white transition-colors">
+            <a
+              href="#macbook-preview"
+              className="hover:text-[#0F172A] dark:hover:text-white transition-colors"
+            >
               Experience
             </a>
-            <a href="#features" className="hover:text-[#0F172A] dark:hover:text-white transition-colors">
+            <a
+              href="#features"
+              className="hover:text-[#0F172A] dark:hover:text-white transition-colors"
+            >
               Features
             </a>
-            <a href="#architecture" className="hover:text-[#0F172A] dark:hover:text-white transition-colors">
+            <a
+              href="#architecture"
+              className="hover:text-[#0F172A] dark:hover:text-white transition-colors"
+            >
               Architecture
             </a>
           </nav>
@@ -83,7 +91,9 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-base sm:text-lg text-[#64748B] dark:text-[#94A3B8] max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
-            One unified, high-performance platform powering student course selections, faculty assignments, and administrative registries with zero friction.
+            One unified, high-performance platform powering student course
+            selections, faculty assignments, and administrative registries with
+            zero friction.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3.5">
@@ -105,7 +115,10 @@ export default function LandingPage() {
       </section>
 
       {/* 3. Centerpiece: Realistic MacBook Pro Hardware Showcase */}
-      <section id="macbook-preview" className="pt-4 pb-24 px-4 sm:px-8 max-w-6xl mx-auto">
+      <section
+        id="macbook-preview"
+        className="pt-4 pb-24 px-4 sm:px-8 max-w-6xl mx-auto"
+      >
         {/* Interactive MacBook Role Selector */}
         <div className="flex justify-center mb-8">
           <div className="inline-flex p-1 rounded-2xl bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-md shadow-black/5">
@@ -171,10 +184,18 @@ export default function LandingPage() {
                     <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-[#DEA123]" />
                     <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-[#1AAB29]" />
                   </div>
-                  <span className="font-semibold text-[10px] sm:text-xs">Campus Portal</span>
-                  <span className="hidden sm:inline text-[10px] text-slate-400">File</span>
-                  <span className="hidden sm:inline text-[10px] text-slate-400">View</span>
-                  <span className="hidden sm:inline text-[10px] text-slate-400">Semester</span>
+                  <span className="font-semibold text-[10px] sm:text-xs">
+                    Campus Portal
+                  </span>
+                  <span className="hidden sm:inline text-[10px] text-slate-400">
+                    File
+                  </span>
+                  <span className="hidden sm:inline text-[10px] text-slate-400">
+                    View
+                  </span>
+                  <span className="hidden sm:inline text-[10px] text-slate-400">
+                    Semester
+                  </span>
                 </div>
 
                 <div className="flex items-center gap-3 text-[10px] text-slate-500 dark:text-slate-400">
@@ -191,9 +212,15 @@ export default function LandingPage() {
                     {/* Welcome banner inside MacBook */}
                     <div className="banner-gradient rounded-[20px] p-5 text-white shadow-md flex items-center justify-between">
                       <div>
-                        <span className="text-[10px] text-blue-200 font-medium">September 4, 2026</span>
-                        <h3 className="text-lg sm:text-xl font-bold mt-0.5">Welcome back, John!</h3>
-                        <p className="text-xs text-blue-100/90">Always stay updated in your student portal</p>
+                        <span className="text-[10px] text-blue-200 font-medium">
+                          September 4, 2026
+                        </span>
+                        <h3 className="text-lg sm:text-xl font-bold mt-0.5">
+                          Welcome back, John!
+                        </h3>
+                        <p className="text-xs text-blue-100/90">
+                          Always stay updated in your student portal
+                        </p>
                       </div>
                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/20">
                         <GraduationCap className="w-5 h-5" />
@@ -203,44 +230,82 @@ export default function LandingPage() {
                     {/* Stat cards inside MacBook */}
                     <div className="grid grid-cols-3 gap-3">
                       <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs">
-                        <span className="text-[10px] text-slate-500 dark:text-slate-400">Current Semester</span>
-                        <p className="text-base sm:text-lg font-bold text-[#0F172A] dark:text-white mt-0.5">5th Sem</p>
-                        <span className="text-[9px] text-slate-400">2023-2027 Batch</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                          Current Semester
+                        </span>
+                        <p className="text-base sm:text-lg font-bold text-[#0F172A] dark:text-white mt-0.5">
+                          5th Sem
+                        </p>
+                        <span className="text-[9px] text-slate-400">
+                          2023-2027 Batch
+                        </span>
                       </div>
                       <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border-2 border-[#0D2185] dark:border-[#4C66F5] shadow-sm">
-                        <span className="text-[10px] text-[#0D2185] dark:text-[#4C66F5] font-semibold">Enrolled Courses</span>
-                        <p className="text-base sm:text-lg font-bold text-[#0F172A] dark:text-white mt-0.5">6 Subjects</p>
-                        <span className="text-[9px] text-slate-400">21.5 Total Credits</span>
+                        <span className="text-[10px] text-[#0D2185] dark:text-[#4C66F5] font-semibold">
+                          Enrolled Courses
+                        </span>
+                        <p className="text-base sm:text-lg font-bold text-[#0F172A] dark:text-white mt-0.5">
+                          6 Subjects
+                        </p>
+                        <span className="text-[9px] text-slate-400">
+                          21.5 Total Credits
+                        </span>
                       </div>
                       <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs">
-                        <span className="text-[10px] text-slate-500 dark:text-slate-400">2nd Year GPA</span>
-                        <p className="text-base sm:text-lg font-bold text-[#0F172A] dark:text-white mt-0.5">9.08</p>
-                        <span className="text-[9px] text-slate-400">Cumulative Grade</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                          2nd Year GPA
+                        </span>
+                        <p className="text-base sm:text-lg font-bold text-[#0F172A] dark:text-white mt-0.5">
+                          9.08
+                        </p>
+                        <span className="text-[9px] text-slate-400">
+                          Cumulative Grade
+                        </span>
                       </div>
                     </div>
 
                     {/* 2-up Enrolled courses inside MacBook */}
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-semibold text-[#0F172A] dark:text-white">Enrolled Courses</span>
-                        <span className="text-[10px] text-[#0D2185] dark:text-[#4C66F5] font-medium">See all</span>
+                        <span className="text-xs font-semibold text-[#0F172A] dark:text-white">
+                          Enrolled Courses
+                        </span>
+                        <span className="text-[10px] text-[#0D2185] dark:text-[#4C66F5] font-medium">
+                          See all
+                        </span>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div className="p-3.5 rounded-[16px] bg-[#EEF4FF] dark:bg-[#162052]/60 border border-[#D7E4FD] dark:border-[#1E2B63] flex items-center justify-between">
                           <div>
-                            <span className="text-[9px] font-bold text-[#0D2185] dark:text-[#8C97D6]">CSE3101</span>
-                            <p className="text-xs font-semibold text-[#0D2185] dark:text-white">Database Systems</p>
-                            <p className="text-[10px] text-slate-500 dark:text-slate-400">4.0 Credits • Theory</p>
+                            <span className="text-[9px] font-bold text-[#0D2185] dark:text-[#8C97D6]">
+                              CSE3101
+                            </span>
+                            <p className="text-xs font-semibold text-[#0D2185] dark:text-white">
+                              Database Systems
+                            </p>
+                            <p className="text-[10px] text-slate-500 dark:text-slate-400">
+                              4.0 Credits • Theory
+                            </p>
                           </div>
-                          <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-[#0D2185] text-white">View</span>
+                          <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-[#0D2185] text-white">
+                            View
+                          </span>
                         </div>
                         <div className="p-3.5 rounded-[16px] bg-[#EEF4FF] dark:bg-[#162052]/60 border border-[#D7E4FD] dark:border-[#1E2B63] flex items-center justify-between">
                           <div>
-                            <span className="text-[9px] font-bold text-[#0D2185] dark:text-[#8C97D6]">AML3144</span>
-                            <p className="text-xs font-semibold text-[#0D2185] dark:text-white">OOP Using Java</p>
-                            <p className="text-[10px] text-slate-500 dark:text-slate-400">3.0 Credits • Theory</p>
+                            <span className="text-[9px] font-bold text-[#0D2185] dark:text-[#8C97D6]">
+                              AML3144
+                            </span>
+                            <p className="text-xs font-semibold text-[#0D2185] dark:text-white">
+                              OOP Using Java
+                            </p>
+                            <p className="text-[10px] text-slate-500 dark:text-slate-400">
+                              3.0 Credits • Theory
+                            </p>
                           </div>
-                          <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-[#0D2185] text-white">View</span>
+                          <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-[#0D2185] text-white">
+                            View
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -251,9 +316,15 @@ export default function LandingPage() {
                   <div className="space-y-4">
                     <div className="banner-gradient rounded-[20px] p-5 text-white shadow-md flex items-center justify-between">
                       <div>
-                        <span className="text-[10px] text-blue-200 font-medium">Faculty Workspace</span>
-                        <h3 className="text-lg sm:text-xl font-bold mt-0.5">Prof. (Dr.) Sujay Saha</h3>
-                        <p className="text-xs text-blue-100/90">Head of Department • AIML</p>
+                        <span className="text-[10px] text-blue-200 font-medium">
+                          Faculty Workspace
+                        </span>
+                        <h3 className="text-lg sm:text-xl font-bold mt-0.5">
+                          Prof. (Dr.) Sujay Saha
+                        </h3>
+                        <p className="text-xs text-blue-100/90">
+                          Head of Department • AIML
+                        </p>
                       </div>
                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/20">
                         <BookOpen className="w-5 h-5" />
@@ -262,24 +333,40 @@ export default function LandingPage() {
 
                     <div className="grid grid-cols-3 gap-3">
                       <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs">
-                        <span className="text-[10px] text-slate-500 dark:text-slate-400">Assigned Department</span>
-                        <p className="text-base font-bold text-[#0F172A] dark:text-white mt-0.5">AIML</p>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                          Assigned Department
+                        </span>
+                        <p className="text-base font-bold text-[#0F172A] dark:text-white mt-0.5">
+                          AIML
+                        </p>
                       </div>
                       <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border-2 border-[#0D2185] dark:border-[#4C66F5] shadow-sm">
-                        <span className="text-[10px] text-[#0D2185] dark:text-[#4C66F5] font-semibold">Subjects Taught</span>
-                        <p className="text-base font-bold text-[#0F172A] dark:text-white mt-0.5">4 Courses</p>
+                        <span className="text-[10px] text-[#0D2185] dark:text-[#4C66F5] font-semibold">
+                          Subjects Taught
+                        </span>
+                        <p className="text-base font-bold text-[#0F172A] dark:text-white mt-0.5">
+                          4 Courses
+                        </p>
                       </div>
                       <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs">
-                        <span className="text-[10px] text-slate-500 dark:text-slate-400">Students Enrolled</span>
-                        <p className="text-base font-bold text-[#0F172A] dark:text-white mt-0.5">129 Students</p>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                          Students Enrolled
+                        </span>
+                        <p className="text-base font-bold text-[#0F172A] dark:text-white mt-0.5">
+                          129 Students
+                        </p>
                       </div>
                     </div>
 
                     <div className="p-4 rounded-[18px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs">
                       <div className="flex items-center justify-between mb-2">
                         <div>
-                          <span className="text-[10px] font-bold text-[#0D2185] dark:text-[#8C97D6]">AML3101</span>
-                          <h4 className="text-xs font-bold text-[#0F172A] dark:text-white">Machine Learning (Theory)</h4>
+                          <span className="text-[10px] font-bold text-[#0D2185] dark:text-[#8C97D6]">
+                            AML3101
+                          </span>
+                          <h4 className="text-xs font-bold text-[#0F172A] dark:text-white">
+                            Machine Learning (Theory)
+                          </h4>
                         </div>
                         <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-[#0D2185] text-white">
                           Upload Marks
@@ -296,9 +383,15 @@ export default function LandingPage() {
                   <div className="space-y-4">
                     <div className="banner-gradient rounded-[20px] p-5 text-white shadow-md flex items-center justify-between">
                       <div>
-                        <span className="text-[10px] text-blue-200 font-medium">Administrator Control</span>
-                        <h3 className="text-lg sm:text-xl font-bold mt-0.5">Campus Administration</h3>
-                        <p className="text-xs text-blue-100/90">System Registry & Account Provisioning</p>
+                        <span className="text-[10px] text-blue-200 font-medium">
+                          Administrator Control
+                        </span>
+                        <h3 className="text-lg sm:text-xl font-bold mt-0.5">
+                          Campus Administration
+                        </h3>
+                        <p className="text-xs text-blue-100/90">
+                          System Registry & Account Provisioning
+                        </p>
                       </div>
                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/20">
                         <Users className="w-5 h-5" />
@@ -307,20 +400,36 @@ export default function LandingPage() {
 
                     <div className="grid grid-cols-4 gap-2.5">
                       <div className="p-3 rounded-[14px] bg-white dark:bg-[#0E1535] border-2 border-[#0D2185] dark:border-[#4C66F5] shadow-xs text-center">
-                        <span className="text-[9px] text-slate-500 dark:text-slate-400">Total Students</span>
-                        <p className="text-base font-bold text-[#0F172A] dark:text-white">129</p>
+                        <span className="text-[9px] text-slate-500 dark:text-slate-400">
+                          Total Students
+                        </span>
+                        <p className="text-base font-bold text-[#0F172A] dark:text-white">
+                          129
+                        </p>
                       </div>
                       <div className="p-3 rounded-[14px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-center">
-                        <span className="text-[9px] text-slate-500 dark:text-slate-400">Total Faculty</span>
-                        <p className="text-base font-bold text-[#0F172A] dark:text-white">13</p>
+                        <span className="text-[9px] text-slate-500 dark:text-slate-400">
+                          Total Faculty
+                        </span>
+                        <p className="text-base font-bold text-[#0F172A] dark:text-white">
+                          13
+                        </p>
                       </div>
                       <div className="p-3 rounded-[14px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-center">
-                        <span className="text-[9px] text-slate-500 dark:text-slate-400">Departments</span>
-                        <p className="text-base font-bold text-[#0F172A] dark:text-white">2</p>
+                        <span className="text-[9px] text-slate-500 dark:text-slate-400">
+                          Departments
+                        </span>
+                        <p className="text-base font-bold text-[#0F172A] dark:text-white">
+                          2
+                        </p>
                       </div>
                       <div className="p-3 rounded-[14px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-center">
-                        <span className="text-[9px] text-slate-500 dark:text-slate-400">Total Courses</span>
-                        <p className="text-base font-bold text-[#0F172A] dark:text-white">88</p>
+                        <span className="text-[9px] text-slate-500 dark:text-slate-400">
+                          Total Courses
+                        </span>
+                        <p className="text-base font-bold text-[#0F172A] dark:text-white">
+                          88
+                        </p>
                       </div>
                     </div>
 
@@ -361,7 +470,8 @@ export default function LandingPage() {
             Designed for precision, built for scale.
           </h2>
           <p className="text-sm sm:text-base text-[#64748B] dark:text-[#94A3B8]">
-            Every interaction is mapped to relational database integrity without artificial layers.
+            Every interaction is mapped to relational database integrity without
+            artificial layers.
           </p>
         </div>
 
@@ -376,7 +486,8 @@ export default function LandingPage() {
                 Retina Curriculum Clarity
               </h3>
               <p className="text-xs sm:text-sm text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
-                Mandatory core theory and practical labs are automatically locked and enrolled for active semester terms.
+                Mandatory core theory and practical labs are automatically
+                locked and enrolled for active semester terms.
               </p>
             </div>
             <div className="pt-6 mt-6 border-t border-slate-100 dark:border-[#1E2B63]/60 text-xs font-semibold text-[#0D2185] dark:text-[#4C66F5]">
@@ -394,7 +505,9 @@ export default function LandingPage() {
                 Transactional Electives
               </h3>
               <p className="text-xs sm:text-sm text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
-                Order preferences for Professional Electives I, II, and Open Electives with transactional database integrity and capacity limits.
+                Order preferences for Professional Electives I, II, and Open
+                Electives with transactional database integrity and capacity
+                limits.
               </p>
             </div>
             <div className="pt-6 mt-6 border-t border-slate-100 dark:border-[#1E2B63]/60 text-xs font-semibold text-[#0D2185] dark:text-[#4C66F5]">
@@ -412,7 +525,8 @@ export default function LandingPage() {
                 Silicon-Tight Security
               </h3>
               <p className="text-xs sm:text-sm text-[#64748B] dark:text-[#94A3B8] leading-relaxed">
-                HttpOnly encrypted JWT cookies with role verification on every API request. Zero exposure of password hashes.
+                HttpOnly encrypted JWT cookies with role verification on every
+                API request. Zero exposure of password hashes.
               </p>
             </div>
             <div className="pt-6 mt-6 border-t border-slate-100 dark:border-[#1E2B63]/60 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
@@ -423,7 +537,10 @@ export default function LandingPage() {
       </section>
 
       {/* 5. Architectural Foundation Section */}
-      <section id="architecture" className="py-20 px-6 bg-slate-100/70 dark:bg-[#0E1535]/50 border-y border-slate-200 dark:border-[#1E2B63]">
+      <section
+        id="architecture"
+        className="py-20 px-6 bg-slate-100/70 dark:bg-[#0E1535]/50 border-y border-slate-200 dark:border-[#1E2B63]"
+      >
         <div className="max-w-5xl mx-auto text-center">
           <span className="text-xs font-semibold uppercase tracking-wider text-[#0D2185] dark:text-[#4C66F5]">
             Built with modern standards
@@ -435,26 +552,42 @@ export default function LandingPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div className="p-5 rounded-2xl bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-left">
               <Database className="w-5 h-5 text-[#0D2185] dark:text-[#4C66F5] mb-2" />
-              <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">PostgreSQL</h4>
-              <p className="text-xs text-[#64748B] dark:text-[#94A3B8] mt-1">Normalized schema with enums & indexes</p>
+              <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">
+                PostgreSQL
+              </h4>
+              <p className="text-xs text-[#64748B] dark:text-[#94A3B8] mt-1">
+                Normalized schema with enums & indexes
+              </p>
             </div>
 
             <div className="p-5 rounded-2xl bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-left">
               <Cpu className="w-5 h-5 text-[#0D2185] dark:text-[#4C66F5] mb-2" />
-              <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">Next.js 16</h4>
-              <p className="text-xs text-[#64748B] dark:text-[#94A3B8] mt-1">App router with server components</p>
+              <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">
+                Next.js 16
+              </h4>
+              <p className="text-xs text-[#64748B] dark:text-[#94A3B8] mt-1">
+                App router with server components
+              </p>
             </div>
 
             <div className="p-5 rounded-2xl bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-left">
               <Layers className="w-5 h-5 text-[#0D2185] dark:text-[#4C66F5] mb-2" />
-              <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">Express & TS</h4>
-              <p className="text-xs text-[#64748B] dark:text-[#94A3B8] mt-1">Parameterized SQL with Zod schemas</p>
+              <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">
+                Express & TS
+              </h4>
+              <p className="text-xs text-[#64748B] dark:text-[#94A3B8] mt-1">
+                Parameterized SQL with Zod schemas
+              </p>
             </div>
 
             <div className="p-5 rounded-2xl bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-left">
               <Lock className="w-5 h-5 text-[#0D2185] dark:text-[#4C66F5] mb-2" />
-              <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">HttpOnly Auth</h4>
-              <p className="text-xs text-[#64748B] dark:text-[#94A3B8] mt-1">Secure cross-site session verification</p>
+              <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">
+                HttpOnly Auth
+              </h4>
+              <p className="text-xs text-[#64748B] dark:text-[#94A3B8] mt-1">
+                Secure cross-site session verification
+              </p>
             </div>
           </div>
         </div>
@@ -470,7 +603,8 @@ export default function LandingPage() {
               Step into your academic workspace.
             </h2>
             <p className="text-sm sm:text-base text-blue-100/90 mb-8 font-normal leading-relaxed">
-              Sign in with your roll number, teacher code, or administrator account to get started.
+              Sign in with your roll number, teacher code, or administrator
+              account to get started.
             </p>
             <Link
               href="/login"
@@ -486,15 +620,27 @@ export default function LandingPage() {
       {/* 7. Footer */}
       <footer className="py-10 px-6 border-t border-slate-200 dark:border-[#1E2B63] text-xs text-[#64748B] dark:text-[#94A3B8] text-center">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} {siteConfig.collegeName}. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} {siteConfig.collegeName}. All rights
+            reserved.
+          </p>
           <div className="flex items-center gap-6">
-            <Link href="/login?role=student" className="hover:text-[#0F172A] dark:hover:text-white transition-colors">
+            <Link
+              href="/login?role=student"
+              className="hover:text-[#0F172A] dark:hover:text-white transition-colors"
+            >
               Student
             </Link>
-            <Link href="/login?role=faculty" className="hover:text-[#0F172A] dark:hover:text-white transition-colors">
+            <Link
+              href="/login?role=faculty"
+              className="hover:text-[#0F172A] dark:hover:text-white transition-colors"
+            >
               Faculty
             </Link>
-            <Link href="/login?role=admin" className="hover:text-[#0F172A] dark:hover:text-white transition-colors">
+            <Link
+              href="/login?role=admin"
+              className="hover:text-[#0F172A] dark:hover:text-white transition-colors"
+            >
               Admin
             </Link>
           </div>

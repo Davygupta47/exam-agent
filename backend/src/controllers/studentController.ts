@@ -1,8 +1,15 @@
-import { Request, Response, NextFunction } from 'express';
-import { query, pool } from '../config/db.js';
-import { studentProfileUpdateSchema, electiveSelectionSchema } from '../validators/authValidators.js';
+import { Request, Response, NextFunction } from "express";
+import { query, pool } from "../config/db.js";
+import {
+  studentProfileUpdateSchema,
+  electiveSelectionSchema,
+} from "../validators/authValidators.js";
 
-export async function getStudentDashboard(req: Request, res: Response, next: NextFunction) {
+export async function getStudentDashboard(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
     const userId = req.user!.id;
 
@@ -24,7 +31,9 @@ export async function getStudentDashboard(req: Request, res: Response, next: Nex
     );
 
     if (studentRes.rows.length === 0) {
-      return res.status(404).json({ success: false, error: 'Student record not found' });
+      return res
+        .status(404)
+        .json({ success: false, error: "Student record not found" });
     }
 
     const student = studentRes.rows[0];
@@ -41,7 +50,10 @@ export async function getStudentDashboard(req: Request, res: Response, next: Nex
     );
 
     // Calculate total credits
-    const totalCredits = coursesRes.rows.reduce((acc, c) => acc + parseFloat(c.credits || '0'), 0);
+    const totalCredits = coursesRes.rows.reduce(
+      (acc, c) => acc + parseFloat(c.credits || "0"),
+      0
+    );
 
     // Fetch department faculty members
     const facultyRes = await query(
@@ -71,21 +83,23 @@ export async function getStudentDashboard(req: Request, res: Response, next: Nex
         profile: student,
         stats: [
           {
-            label: 'Current Semester',
+            label: "Current Semester",
             value: `${student.current_semester}th Sem`,
-            subtext: `${student.batch_label || '2023-2027'} Batch`,
+            subtext: `${student.batch_label || "2023-2027"} Batch`,
             highlight: false,
           },
           {
-            label: 'Enrolled Courses',
+            label: "Enrolled Courses",
             value: `${coursesRes.rows.length} Subjects`,
             subtext: `${totalCredits.toFixed(1)} Total Credits`,
             highlight: true, // Selected card with primary border per reference
           },
           {
-            label: '2nd Year GPA',
-            value: student.second_year_gpa ? `${student.second_year_gpa}` : 'N/A',
-            subtext: 'Cumulative Grade',
+            label: "2nd Year GPA",
+            value: student.second_year_gpa
+              ? `${student.second_year_gpa}`
+              : "N/A",
+            subtext: "Cumulative Grade",
             highlight: false,
           },
         ],
@@ -99,7 +113,11 @@ export async function getStudentDashboard(req: Request, res: Response, next: Nex
   }
 }
 
-export async function getStudentProfile(req: Request, res: Response, next: NextFunction) {
+export async function getStudentProfile(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
     const userId = req.user!.id;
 
@@ -119,7 +137,9 @@ export async function getStudentProfile(req: Request, res: Response, next: NextF
     );
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ success: false, error: 'Student not found' });
+      return res
+        .status(404)
+        .json({ success: false, error: "Student not found" });
     }
 
     return res.json({ success: true, profile: result.rows[0] });
@@ -128,7 +148,11 @@ export async function getStudentProfile(req: Request, res: Response, next: NextF
   }
 }
 
-export async function updateStudentProfile(req: Request, res: Response, next: NextFunction) {
+export async function updateStudentProfile(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
     const userId = req.user!.id;
     const validated = studentProfileUpdateSchema.parse(req.body);
@@ -145,12 +169,14 @@ export async function updateStudentProfile(req: Request, res: Response, next: Ne
     );
 
     if (updateRes.rows.length === 0) {
-      return res.status(404).json({ success: false, error: 'Student not found' });
+      return res
+        .status(404)
+        .json({ success: false, error: "Student not found" });
     }
 
     return res.json({
       success: true,
-      message: 'Profile updated successfully',
+      message: "Profile updated successfully",
       profile: updateRes.rows[0],
     });
   } catch (err) {
@@ -158,7 +184,11 @@ export async function updateStudentProfile(req: Request, res: Response, next: Ne
   }
 }
 
-export async function getStudentElectives(req: Request, res: Response, next: NextFunction) {
+export async function getStudentElectives(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
     const userId = req.user!.id;
 
@@ -171,10 +201,17 @@ export async function getStudentElectives(req: Request, res: Response, next: Nex
     );
 
     if (studentRes.rows.length === 0) {
-      return res.status(404).json({ success: false, error: 'Student record not found' });
+      return res
+        .status(404)
+        .json({ success: false, error: "Student record not found" });
     }
 
-    const { id: studentId, tenant_id, department_id, current_semester } = studentRes.rows[0];
+    const {
+      id: studentId,
+      tenant_id,
+      department_id,
+      current_semester,
+    } = studentRes.rows[0];
 
     // Check for active elective window
     const windowRes = await query(
@@ -238,7 +275,12 @@ export async function getStudentElectives(req: Request, res: Response, next: Nex
   }
 }
 
-export async function submitStudentElectives(req: Request, res: Response, next: NextFunction) {
+//dekhte hobe
+export async function submitStudentElectives(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   const client = await pool.connect();
   try {
     const userId = req.user!.id;
@@ -250,7 +292,9 @@ export async function submitStudentElectives(req: Request, res: Response, next: 
     );
 
     if (studentRes.rows.length === 0) {
-      return res.status(404).json({ success: false, error: 'Student record not found' });
+      return res
+        .status(404)
+        .json({ success: false, error: "Student record not found" });
     }
 
     const { id: studentId, tenant_id, current_semester } = studentRes.rows[0];
@@ -265,18 +309,29 @@ export async function submitStudentElectives(req: Request, res: Response, next: 
     );
 
     if (windowRes.rows.length === 0) {
-      return res.status(400).json({ success: false, error: 'No elective window is currently open.' });
+      return res
+        .status(400)
+        .json({
+          success: false,
+          error: "No elective window is currently open.",
+        });
     }
 
     const window = windowRes.rows[0];
     const now = new Date();
     const closesAt = new Date(window.closes_at);
 
-    if (window.status !== 'OPEN' || now > closesAt) {
-      return res.status(400).json({ success: false, error: 'The elective preference window has closed. Preferences can no longer be submitted.' });
+    if (window.status !== "OPEN" || now > closesAt) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          error:
+            "The elective preference window has closed. Preferences can no longer be submitted.",
+        });
     }
 
-    await client.query('BEGIN');
+    await client.query("BEGIN");
 
     // Save or update preferences (NO direct enrollment — allocation happens after deadline)
     await client.query(
@@ -288,17 +343,26 @@ export async function submitStudentElectives(req: Request, res: Response, next: 
                      pref_3_id = EXCLUDED.pref_3_id,
                      status = 'SUBMITTED',
                      created_at = NOW()`,
-      [tenant_id, studentId, validated.semester, validated.elective_type, validated.pref_1_id, validated.pref_2_id, validated.pref_3_id]
+      [
+        tenant_id,
+        studentId,
+        validated.semester,
+        validated.elective_type,
+        validated.pref_1_id,
+        validated.pref_2_id,
+        validated.pref_3_id,
+      ]
     );
 
-    await client.query('COMMIT');
+    await client.query("COMMIT");
 
     return res.json({
       success: true,
-      message: 'Elective preferences recorded successfully. Allocation will happen after the deadline.',
+      message:
+        "Elective preferences recorded successfully. Allocation will happen after the deadline.",
     });
   } catch (err) {
-    await client.query('ROLLBACK');
+    await client.query("ROLLBACK");
     next(err);
   } finally {
     client.release();
