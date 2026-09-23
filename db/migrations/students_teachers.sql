@@ -65,3 +65,10 @@ CREATE TABLE student_subjects (
   created_at  TIMESTAMPTZ DEFAULT NOW(),
   UNIQUE(tenant_id, student_id, subject_id)
 );
+/* 
+Reason: DB Slow Query] 384ms 
+ami already /students page a chilam then server resatrt korechi.
+Eta ekta edge case hote pare.
+*/
+CREATE INDEX idx_students_user_id ON students(user_id);
+CREATE INDEX idx_teachers_user_id ON teachers(user_id);
