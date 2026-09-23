@@ -2,7 +2,14 @@
 
 import * as React from "react";
 import { fetchApi } from "@/lib/api";
-import { CheckCircle2, AlertCircle, Sparkles, Send, Clock, Trophy } from "lucide-react";
+import {
+  CheckCircle2,
+  AlertCircle,
+  Sparkles,
+  Send,
+  Clock,
+  Trophy,
+} from "lucide-react";
 
 interface ElectiveOption {
   id: number;
@@ -40,13 +47,19 @@ export function ElectiveSelector({
   const [electives, setElectives] = React.useState<ElectiveOption[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [submitting, setSubmitting] = React.useState(false);
-  const [message, setMessage] = React.useState<{ type: "success" | "error"; text: string } | null>(null);
-  const [electiveWindow, setElectiveWindow] = React.useState<ElectiveWindow | null>(null);
+  const [message, setMessage] = React.useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
+  const [electiveWindow, setElectiveWindow] =
+    React.useState<ElectiveWindow | null>(null);
   const [allocations, setAllocations] = React.useState<AllocationResult[]>([]);
   const [timeRemaining, setTimeRemaining] = React.useState<number>(0);
 
   // Preference selections
-  const [selectedType, setSelectedType] = React.useState<string>("PROFESSIONAL_ELECTIVE_I");
+  const [selectedType, setSelectedType] = React.useState<string>(
+    "PROFESSIONAL_ELECTIVE_I"
+  );
   const [pref1, setPref1] = React.useState<string>("");
   const [pref2, setPref2] = React.useState<string>("");
   const [pref3, setPref3] = React.useState<string>("");
@@ -91,11 +104,17 @@ export function ElectiveSelector({
   }, [electiveWindow, loadElectives]);
 
   // Filter electives by selected category
-  const currentOptions = electives.filter((e) => e.elective_type === selectedType);
+  const currentOptions = electives.filter(
+    (e) => e.elective_type === selectedType
+  );
 
   // Window state helpers
   const isWindowOpen = electiveWindow?.status === "OPEN" && timeRemaining > 0;
-  const isAllocated = electiveWindow?.status === "ALLOCATED";
+  /*
+  [isAllocated] ei ta remove kora karon akhon amra direct allocate korchi. future ei ta abar revert kore dite hobe.
+  */
+
+  //const isAllocated = electiveWindow?.status === "ALLOCATED";
   const hasAllocations = allocations.length > 0;
 
   const formatTime = (ms: number) => {
@@ -108,11 +127,17 @@ export function ElectiveSelector({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!pref1 || !pref2 || !pref3) {
-      setMessage({ type: "error", text: "Please select all 3 preferences in order." });
+      setMessage({
+        type: "error",
+        text: "Please select all 3 preferences in order.",
+      });
       return;
     }
     if (pref1 === pref2 || pref2 === pref3 || pref1 === pref3) {
-      setMessage({ type: "error", text: "Each preference must be a different subject." });
+      setMessage({
+        type: "error",
+        text: "Each preference must be a different subject.",
+      });
       return;
     }
 
@@ -133,10 +158,18 @@ export function ElectiveSelector({
     setSubmitting(false);
 
     if (res.success) {
-      setMessage({ type: "success", text: res.message || "Preferences recorded! Allocation will happen after the deadline." });
+      setMessage({
+        type: "success",
+        text:
+          res.message ||
+          "Preferences recorded! Allocation will happen after the deadline.",
+      });
       if (onRefresh) onRefresh();
     } else {
-      setMessage({ type: "error", text: res.error || "Failed to submit elective choices." });
+      setMessage({
+        type: "error",
+        text: res.error || "Failed to submit elective choices.",
+      });
     }
   };
 
@@ -154,7 +187,7 @@ export function ElectiveSelector({
   }
 
   // ── Allocation Results View ──
-  if (hasAllocations && isAllocated) {
+  if (hasAllocations) {
     return (
       <div className="mt-8 p-6 rounded-[24px] bg-white dark:bg-[#0F1538] border border-[#E4E8F5] dark:border-[#232C63] soft-shadow">
         <div className="flex items-center gap-2 mb-5">
@@ -166,20 +199,29 @@ export function ElectiveSelector({
 
         <div className="space-y-3">
           {allocations.map((alloc, idx) => {
-            const prefLabel = alloc.preference_rank === 1 ? "1st Preference" : alloc.preference_rank === 2 ? "2nd Preference" : "3rd Preference";
-            const prefColor = alloc.preference_rank === 1
-              ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
-              : alloc.preference_rank === 2
-              ? "bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800"
-              : "bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800";
+            const prefLabel =
+              alloc.preference_rank === 1
+                ? "1st Preference"
+                : alloc.preference_rank === 2
+                ? "2nd Preference"
+                : "3rd Preference";
+            const prefColor =
+              alloc.preference_rank === 1
+                ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
+                : alloc.preference_rank === 2
+                ? "bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800"
+                : "bg-blue-50 dark:bg-blue-950/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800";
 
             return (
               <div key={idx} className={`p-4 rounded-xl border ${prefColor}`}>
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-semibold">{alloc.subject_code} — {alloc.subject_name}</p>
+                    <p className="text-sm font-semibold">
+                      {alloc.subject_code} — {alloc.subject_name}
+                    </p>
                     <p className="text-xs mt-0.5 opacity-80">
-                      {alloc.elective_type.replace(/_/g, " ")} • {alloc.credits} Credits
+                      {alloc.elective_type.replace(/_/g, " ")} • {alloc.credits}{" "}
+                      Credits
                     </p>
                   </div>
                   <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-white/60 dark:bg-black/20">
@@ -214,12 +256,14 @@ export function ElectiveSelector({
             <span className="text-sm font-bold text-[#0D2185] dark:text-[#4C66F5] tabular-nums">
               {formatTime(timeRemaining)}
             </span>
-            <span className="text-xs text-[#6B7194] dark:text-[#8C95C6]">remaining</span>
+            <span className="text-xs text-[#6B7194] dark:text-[#8C95C6]">
+              remaining
+            </span>
           </div>
         )}
 
         {/* Window Closed Message */}
-        {electiveWindow && electiveWindow.status === "CLOSED" && !isAllocated && (
+        {electiveWindow && electiveWindow.status === "CLOSED" && (
           <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800">
             <Clock className="w-4 h-4 text-amber-600 dark:text-amber-400" />
             <span className="text-xs font-medium text-amber-700 dark:text-amber-300">
@@ -242,7 +286,10 @@ export function ElectiveSelector({
       <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-[#1A2255] mb-5 w-fit">
         <button
           type="button"
-          onClick={() => { setSelectedType("PROFESSIONAL_ELECTIVE_I"); setMessage(null); }}
+          onClick={() => {
+            setSelectedType("PROFESSIONAL_ELECTIVE_I");
+            setMessage(null);
+          }}
           className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             selectedType === "PROFESSIONAL_ELECTIVE_I"
               ? "bg-white dark:bg-[#0D2185] text-[#0D2185] dark:text-white shadow-xs"
@@ -253,7 +300,10 @@ export function ElectiveSelector({
         </button>
         <button
           type="button"
-          onClick={() => { setSelectedType("PROFESSIONAL_ELECTIVE_II"); setMessage(null); }}
+          onClick={() => {
+            setSelectedType("PROFESSIONAL_ELECTIVE_II");
+            setMessage(null);
+          }}
           className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             selectedType === "PROFESSIONAL_ELECTIVE_II"
               ? "bg-white dark:bg-[#0D2185] text-[#0D2185] dark:text-white shadow-xs"
@@ -264,7 +314,10 @@ export function ElectiveSelector({
         </button>
         <button
           type="button"
-          onClick={() => { setSelectedType("OPEN_ELECTIVE_I"); setMessage(null); }}
+          onClick={() => {
+            setSelectedType("OPEN_ELECTIVE_I");
+            setMessage(null);
+          }}
           className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             selectedType === "OPEN_ELECTIVE_I"
               ? "bg-white dark:bg-[#0D2185] text-[#0D2185] dark:text-white shadow-xs"
