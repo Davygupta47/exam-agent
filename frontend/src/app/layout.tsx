@@ -23,7 +23,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans antialiased min-h-screen selection:bg-[#0D2185] selection:text-white dark:selection:bg-[#4C66F5]">
+      <body className="font-sans antialiased min-h-screen selection:bg-blue-600 selection:text-white dark:selection:bg-blue-500">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

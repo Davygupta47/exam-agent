@@ -23,17 +23,17 @@ export default function LandingPage() {
   >("student");
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#070B1E] text-[#0F172A] dark:text-[#F1F5F9] selection:bg-[#0D2185] selection:text-white dark:selection:bg-[#4C66F5] overflow-x-hidden">
+    <div className="min-h-screen bg-page text-ink selection:bg-blue-600 selection:text-white dark:selection:bg-blue-500 overflow-x-hidden">
       {/* 1. Apple-style Floating Header */}
       <div className="fixed top-5 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
-        <header className="pointer-events-auto h-14 px-5 rounded-full bg-white/80 dark:bg-[#0E1535]/80 backdrop-blur-xl border border-slate-200/80 dark:border-[#1E2B63] shadow-lg shadow-black/5 flex items-center justify-between gap-6 max-w-4xl w-full">
+        <header className="pointer-events-auto h-14 px-5 rounded-full bg-surface/80 backdrop-blur-xl border border-subtle shadow-lg shadow-black/5 flex items-center justify-between gap-6 max-w-4xl w-full">
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#0D2185] dark:bg-[#4C66F5] flex items-center justify-center text-white shadow-xs">
+            <div className="w-8 h-8 rounded-lg bg-blue-600 dark:bg-blue-500 flex items-center justify-center text-white shadow-xs">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
               </svg>
             </div>
-            <span className="font-semibold text-sm tracking-tight text-[#0F172A] dark:text-white">
+            <span className="font-semibold text-sm tracking-tight text-ink">
               {siteConfig.name}
             </span>
           </Link>
@@ -63,7 +63,7 @@ export default function LandingPage() {
             <ThemeToggle />
             <Link
               href="/login"
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#0D2185] hover:bg-[#081454] dark:bg-[#4C66F5] dark:hover:bg-[#6178F7] text-white shadow-xs transition-colors"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white shadow-xs transition-colors"
             >
               <span>Sign in</span>
               <ArrowRight className="w-3 h-3" />
@@ -78,19 +78,19 @@ export default function LandingPage() {
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-blue-500/10 via-indigo-500/15 to-transparent blur-3xl pointer-events-none rounded-full" />
 
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-xs font-medium text-[#0D2185] dark:text-[#8C97D6] mb-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-subtle shadow-xs text-xs font-medium text-blue-600 dark:text-blue-400 mb-6">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>Heritage Institute of Technology • Exam Portal</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#0F172A] dark:text-white leading-[1.1] mb-6 max-w-4xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-ink leading-[1.1] mb-6 max-w-4xl mx-auto">
             The college operating system. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0D2185] via-[#374785] to-[#4C66F5] dark:from-[#8C97D6] dark:via-[#DDE3FF] dark:to-white">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-400">
               Engineered for clarity.
             </span>
           </h1>
 
-          <p className="text-base sm:text-lg text-[#64748B] dark:text-[#94A3B8] max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-ink-muted max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
             One unified, high-performance platform powering student course
             selections, faculty assignments, and administrative registries with
             zero friction.
@@ -99,14 +99,14 @@ export default function LandingPage() {
           <div className="flex flex-wrap items-center justify-center gap-3.5">
             <Link
               href="/login"
-              className="flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold bg-[#0D2185] hover:bg-[#081454] dark:bg-[#4C66F5] dark:hover:bg-[#6178F7] text-white shadow-md shadow-blue-900/10 transition-all active:scale-98"
+              className="flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white shadow-md shadow-blue-500/10 transition-all active:scale-98"
             >
               <span>Enter Portal</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="#macbook-preview"
-              className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-white dark:bg-[#0E1535] hover:bg-slate-50 dark:hover:bg-[#141D45] text-[#0F172A] dark:text-white border border-slate-200 dark:border-[#1E2B63] shadow-xs transition-colors"
+              className="flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold bg-surface hover:bg-surface-muted text-ink border border-subtle shadow-xs transition-colors"
             >
               <span>Explore Preview</span>
             </a>
@@ -121,14 +121,14 @@ export default function LandingPage() {
       >
         {/* Interactive MacBook Role Selector */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex p-1 rounded-2xl bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-md shadow-black/5">
+          <div className="inline-flex p-1 rounded-2xl bg-surface border border-subtle shadow-md shadow-black/5">
             <button
               type="button"
               onClick={() => setSelectedRole("student")}
               className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all ${
                 selectedRole === "student"
-                  ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
-                  : "text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white"
+                  ? "bg-blue-600 dark:bg-blue-500 text-white shadow-xs"
+                  : "text-ink-muted hover:text-ink"
               }`}
             >
               Student Workspace
@@ -138,8 +138,8 @@ export default function LandingPage() {
               onClick={() => setSelectedRole("faculty")}
               className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all ${
                 selectedRole === "faculty"
-                  ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
-                  : "text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white"
+                  ? "bg-blue-600 dark:bg-blue-500 text-white shadow-xs"
+                  : "text-ink-muted hover:text-ink"
               }`}
             >
               Faculty Desk
@@ -149,8 +149,8 @@ export default function LandingPage() {
               onClick={() => setSelectedRole("admin")}
               className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all ${
                 selectedRole === "admin"
-                  ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
-                  : "text-[#64748B] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-white"
+                  ? "bg-blue-600 dark:bg-blue-500 text-white shadow-xs"
+                  : "text-ink-muted hover:text-ink"
               }`}
             >
               Admin Command
@@ -174,9 +174,9 @@ export default function LandingPage() {
             </div>
 
             {/* Inner Screen Display */}
-            <div className="relative rounded-[18px] sm:rounded-[24px] bg-[#F8FAFC] dark:bg-[#070B1E] overflow-hidden border border-black/30 aspect-[16/10] flex flex-col select-none">
+            <div className="relative rounded-[18px] sm:rounded-[24px] bg-[#F8FAFC] dark:bg-slate-950 overflow-hidden border border-black/30 aspect-[16/10] flex flex-col select-none">
               {/* macOS-style Glass Menu Bar */}
-              <div className="h-7 px-3.5 bg-white/70 dark:bg-[#0E1535]/80 backdrop-blur-md border-b border-slate-200/80 dark:border-[#1E2B63] flex items-center justify-between text-[11px] text-[#0F172A] dark:text-slate-300 z-20">
+              <div className="h-7 px-3.5 bg-white/70 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 flex items-center justify-between text-[11px] text-[#0F172A] dark:text-slate-300 z-20">
                 <div className="flex items-center gap-3.5">
                   {/* Window dots */}
                   <div className="flex items-center gap-1.5">
@@ -229,7 +229,7 @@ export default function LandingPage() {
 
                     {/* Stat cards inside MacBook */}
                     <div className="grid grid-cols-3 gap-3">
-                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs">
+                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
                         <span className="text-[10px] text-slate-500 dark:text-slate-400">
                           Current Semester
                         </span>
@@ -240,8 +240,8 @@ export default function LandingPage() {
                           2023-2027 Batch
                         </span>
                       </div>
-                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border-2 border-[#0D2185] dark:border-[#4C66F5] shadow-sm">
-                        <span className="text-[10px] text-[#0D2185] dark:text-[#4C66F5] font-semibold">
+                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-slate-900 border-2 border-blue-600 dark:border-blue-500 shadow-sm">
+                        <span className="text-[10px] text-blue-600 dark:text-blue-400 font-semibold">
                           Enrolled Courses
                         </span>
                         <p className="text-base sm:text-lg font-bold text-[#0F172A] dark:text-white mt-0.5">
@@ -251,7 +251,7 @@ export default function LandingPage() {
                           21.5 Total Credits
                         </span>
                       </div>
-                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs">
+                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
                         <span className="text-[10px] text-slate-500 dark:text-slate-400">
                           2nd Year GPA
                         </span>
@@ -270,40 +270,40 @@ export default function LandingPage() {
                         <span className="text-xs font-semibold text-[#0F172A] dark:text-white">
                           Enrolled Courses
                         </span>
-                        <span className="text-[10px] text-[#0D2185] dark:text-[#4C66F5] font-medium">
+                        <span className="text-[10px] text-blue-600 dark:text-blue-400 font-medium">
                           See all
                         </span>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <div className="p-3.5 rounded-[16px] bg-[#EEF4FF] dark:bg-[#162052]/60 border border-[#D7E4FD] dark:border-[#1E2B63] flex items-center justify-between">
+                        <div className="p-3.5 rounded-[16px] bg-blue-50 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-800/60 flex items-center justify-between">
                           <div>
-                            <span className="text-[9px] font-bold text-[#0D2185] dark:text-[#8C97D6]">
+                            <span className="text-[9px] font-bold text-blue-600 dark:text-blue-400">
                               CSE3101
                             </span>
-                            <p className="text-xs font-semibold text-[#0D2185] dark:text-white">
+                            <p className="text-xs font-semibold text-blue-600 dark:text-white">
                               Database Systems
                             </p>
                             <p className="text-[10px] text-slate-500 dark:text-slate-400">
                               4.0 Credits • Theory
                             </p>
                           </div>
-                          <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-[#0D2185] text-white">
+                          <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-blue-600 dark:bg-blue-500 text-white">
                             View
                           </span>
                         </div>
-                        <div className="p-3.5 rounded-[16px] bg-[#EEF4FF] dark:bg-[#162052]/60 border border-[#D7E4FD] dark:border-[#1E2B63] flex items-center justify-between">
+                        <div className="p-3.5 rounded-[16px] bg-blue-50 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-800/60 flex items-center justify-between">
                           <div>
-                            <span className="text-[9px] font-bold text-[#0D2185] dark:text-[#8C97D6]">
+                            <span className="text-[9px] font-bold text-blue-600 dark:text-blue-400">
                               AML3144
                             </span>
-                            <p className="text-xs font-semibold text-[#0D2185] dark:text-white">
+                            <p className="text-xs font-semibold text-blue-600 dark:text-white">
                               OOP Using Java
                             </p>
                             <p className="text-[10px] text-slate-500 dark:text-slate-400">
                               3.0 Credits • Theory
                             </p>
                           </div>
-                          <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-[#0D2185] text-white">
+                          <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-blue-600 dark:bg-blue-500 text-white">
                             View
                           </span>
                         </div>
@@ -329,10 +329,8 @@ export default function LandingPage() {
                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white border border-white/20">
                         <BookOpen className="w-5 h-5" />
                       </div>
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-3">
-                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs">
+                                        <div className="grid grid-cols-3 gap-3">
+                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
                         <span className="text-[10px] text-slate-500 dark:text-slate-400">
                           Assigned Department
                         </span>
@@ -340,15 +338,15 @@ export default function LandingPage() {
                           AIML
                         </p>
                       </div>
-                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border-2 border-[#0D2185] dark:border-[#4C66F5] shadow-sm">
-                        <span className="text-[10px] text-[#0D2185] dark:text-[#4C66F5] font-semibold">
+                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-slate-900 border-2 border-blue-600 dark:border-blue-500 shadow-sm">
+                        <span className="text-[10px] text-blue-600 dark:text-blue-400 font-semibold">
                           Subjects Taught
                         </span>
                         <p className="text-base font-bold text-[#0F172A] dark:text-white mt-0.5">
                           4 Courses
                         </p>
                       </div>
-                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs">
+                      <div className="p-3.5 rounded-[16px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
                         <span className="text-[10px] text-slate-500 dark:text-slate-400">
                           Students Enrolled
                         </span>
@@ -358,20 +356,20 @@ export default function LandingPage() {
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-[18px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs">
+                    <div className="p-4 rounded-[18px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
                       <div className="flex items-center justify-between mb-2">
                         <div>
-                          <span className="text-[10px] font-bold text-[#0D2185] dark:text-[#8C97D6]">
+                          <span className="text-[9px] font-bold text-blue-600 dark:text-blue-400">
                             AML3101
                           </span>
                           <h4 className="text-xs font-bold text-[#0F172A] dark:text-white">
                             Machine Learning (Theory)
                           </h4>
                         </div>
-                        <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-[#0D2185] text-white">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-blue-600 dark:bg-blue-500 text-white">
                           Upload Marks
                         </span>
-                      </div>
+                      </div>    </div>
                       <p className="text-[10px] text-slate-500 dark:text-slate-400">
                         Semester 5 • 65 Enrolled Students • Verified Syllabus
                       </p>
@@ -399,7 +397,7 @@ export default function LandingPage() {
                     </div>
 
                     <div className="grid grid-cols-4 gap-2.5">
-                      <div className="p-3 rounded-[14px] bg-white dark:bg-[#0E1535] border-2 border-[#0D2185] dark:border-[#4C66F5] shadow-xs text-center">
+                      <div className="p-3 rounded-[14px] bg-white dark:bg-slate-900 border-2 border-blue-600 dark:border-blue-500 shadow-xs text-center">
                         <span className="text-[9px] text-slate-500 dark:text-slate-400">
                           Total Students
                         </span>
@@ -407,7 +405,7 @@ export default function LandingPage() {
                           129
                         </p>
                       </div>
-                      <div className="p-3 rounded-[14px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-center">
+                      <div className="p-3 rounded-[14px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs text-center">
                         <span className="text-[9px] text-slate-500 dark:text-slate-400">
                           Total Faculty
                         </span>
@@ -415,7 +413,7 @@ export default function LandingPage() {
                           13
                         </p>
                       </div>
-                      <div className="p-3 rounded-[14px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-center">
+                      <div className="p-3 rounded-[14px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs text-center">
                         <span className="text-[9px] text-slate-500 dark:text-slate-400">
                           Departments
                         </span>
@@ -423,7 +421,7 @@ export default function LandingPage() {
                           2
                         </p>
                       </div>
-                      <div className="p-3 rounded-[14px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-center">
+                      <div className="p-3 rounded-[14px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs text-center">
                         <span className="text-[9px] text-slate-500 dark:text-slate-400">
                           Total Courses
                         </span>
@@ -433,15 +431,15 @@ export default function LandingPage() {
                       </div>
                     </div>
 
-                    <div className="p-3 rounded-[16px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs flex items-center justify-between">
+                    <div className="p-3 rounded-[16px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex items-center justify-between">
                       <span className="text-xs font-semibold text-[#0F172A] dark:text-white">
                         Registry Access: AIML & Data Science
                       </span>
                       <div className="flex gap-2">
-                        <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-[#0D2185] text-white">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-blue-600 dark:bg-blue-500 text-white">
                           + Add Student
                         </span>
-                        <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-slate-100 dark:bg-[#141D45] text-[#0F172A] dark:text-white border border-slate-200 dark:border-[#1E2B63]">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-semibold bg-slate-100 dark:bg-slate-800 text-[#0F172A] dark:text-white border border-slate-200 dark:border-slate-700">
                           + Add Teacher
                         </span>
                       </div>
@@ -463,7 +461,7 @@ export default function LandingPage() {
       {/* 4. Apple Keynote Style Feature Bento Grid */}
       <section id="features" className="py-20 px-6 max-w-6xl mx-auto">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#0D2185] dark:text-[#4C66F5]">
+          <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
             Hardware-Grade Engineering
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#0F172A] dark:text-white mt-2 mb-4">
@@ -477,9 +475,9 @@ export default function LandingPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1 */}
-          <div className="p-8 rounded-[28px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-sm flex flex-col justify-between">
+          <div className="p-8 rounded-[28px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-[#162052] text-[#0D2185] dark:text-[#4C66F5] flex items-center justify-center mb-6">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-6">
                 <BookOpen className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">
@@ -490,15 +488,15 @@ export default function LandingPage() {
                 locked and enrolled for active semester terms.
               </p>
             </div>
-            <div className="pt-6 mt-6 border-t border-slate-100 dark:border-[#1E2B63]/60 text-xs font-semibold text-[#0D2185] dark:text-[#4C66F5]">
+            <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 text-xs font-semibold text-blue-600 dark:text-blue-400">
               88 Validated Course Codes →
             </div>
           </div>
 
           {/* Card 2 */}
-          <div className="p-8 rounded-[28px] bg-white dark:bg-[#0E1535] border-2 border-[#0D2185] dark:border-[#4C66F5] shadow-md flex flex-col justify-between">
+          <div className="p-8 rounded-[28px] bg-white dark:bg-slate-900 border-2 border-blue-600 dark:border-blue-500 shadow-md flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-[#162052] text-[#0D2185] dark:text-[#4C66F5] flex items-center justify-center mb-6">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-6">
                 <Sparkles className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mb-2">
@@ -510,13 +508,13 @@ export default function LandingPage() {
                 limits.
               </p>
             </div>
-            <div className="pt-6 mt-6 border-t border-slate-100 dark:border-[#1E2B63]/60 text-xs font-semibold text-[#0D2185] dark:text-[#4C66F5]">
+            <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 text-xs font-semibold text-blue-600 dark:text-blue-400">
               ACID Transactional Guarantees →
             </div>
           </div>
 
           {/* Card 3 */}
-          <div className="p-8 rounded-[28px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-sm flex flex-col justify-between">
+          <div className="p-8 rounded-[28px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-[#122E26] text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-6">
                 <Shield className="w-6 h-6" />
@@ -529,7 +527,7 @@ export default function LandingPage() {
                 API request. Zero exposure of password hashes.
               </p>
             </div>
-            <div className="pt-6 mt-6 border-t border-slate-100 dark:border-[#1E2B63]/60 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+            <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
               Role-Based Access Control →
             </div>
           </div>
@@ -539,10 +537,10 @@ export default function LandingPage() {
       {/* 5. Architectural Foundation Section */}
       <section
         id="architecture"
-        className="py-20 px-6 bg-slate-100/70 dark:bg-[#0E1535]/50 border-y border-slate-200 dark:border-[#1E2B63]"
+        className="py-20 px-6 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800"
       >
         <div className="max-w-5xl mx-auto text-center">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#0D2185] dark:text-[#4C66F5]">
+          <span className="text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400">
             Built with modern standards
           </span>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] dark:text-white mt-2 mb-10">
@@ -550,8 +548,8 @@ export default function LandingPage() {
           </h2>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="p-5 rounded-2xl bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-left">
-              <Database className="w-5 h-5 text-[#0D2185] dark:text-[#4C66F5] mb-2" />
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs text-left">
+              <Database className="w-5 h-5 text-blue-600 dark:text-blue-400 mb-2" />
               <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">
                 PostgreSQL
               </h4>
@@ -560,8 +558,8 @@ export default function LandingPage() {
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-left">
-              <Cpu className="w-5 h-5 text-[#0D2185] dark:text-[#4C66F5] mb-2" />
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs text-left">
+              <Cpu className="w-5 h-5 text-blue-600 dark:text-blue-400 mb-2" />
               <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">
                 Next.js 16
               </h4>
@@ -570,8 +568,8 @@ export default function LandingPage() {
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-left">
-              <Layers className="w-5 h-5 text-[#0D2185] dark:text-[#4C66F5] mb-2" />
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs text-left">
+              <Layers className="w-5 h-5 text-blue-600 dark:text-blue-400 mb-2" />
               <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">
                 Express & TS
               </h4>
@@ -580,8 +578,8 @@ export default function LandingPage() {
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs text-left">
-              <Lock className="w-5 h-5 text-[#0D2185] dark:text-[#4C66F5] mb-2" />
+            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs text-left">
+              <Lock className="w-5 h-5 text-blue-600 dark:text-blue-400 mb-2" />
               <h4 className="text-sm font-bold text-[#0F172A] dark:text-white">
                 HttpOnly Auth
               </h4>
@@ -608,7 +606,7 @@ export default function LandingPage() {
             </p>
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold bg-white text-[#0D2185] hover:bg-blue-50 shadow-lg shadow-black/10 transition-all active:scale-98"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold bg-white text-blue-600 hover:bg-blue-50 shadow-lg shadow-black/10 transition-all active:scale-98"
             >
               <span>Sign in to your portal</span>
               <ArrowRight className="w-4 h-4" />
@@ -618,7 +616,7 @@ export default function LandingPage() {
       </section>
 
       {/* 7. Footer */}
-      <footer className="py-10 px-6 border-t border-slate-200 dark:border-[#1E2B63] text-xs text-[#64748B] dark:text-[#94A3B8] text-center">
+      <footer className="py-10 px-6 border-t border-slate-200 dark:border-slate-800 text-xs text-[#64748B] dark:text-[#94A3B8] text-center">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <p>
             © {new Date().getFullYear()} {siteConfig.collegeName}. All rights

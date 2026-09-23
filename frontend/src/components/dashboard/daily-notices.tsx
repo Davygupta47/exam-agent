@@ -35,36 +35,36 @@ export function DailyNotices({ notices }: DailyNoticesProps) {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-base font-bold text-[#0F172A] dark:text-white">
+        <h2 className="text-base font-bold text-ink">
           Daily notice
         </h2>
         <button
           type="button"
           onClick={() => showComingSoon("All Campus Notices")}
-          className="text-xs font-semibold text-[#0D2185] dark:text-[#4C66F5] hover:underline"
+          className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline"
         >
           See all
         </button>
       </div>
 
-      <div className="p-5 rounded-[22px] bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] shadow-xs divide-y divide-slate-100 dark:divide-[#1E2B63]/60">
+      <div className="p-5 rounded-[22px] bg-surface border border-subtle shadow-xs divide-y divide-subtle">
         {items.map((notice, idx) => (
           <div key={notice.id} className={`${idx === 0 ? "pb-4" : "pt-4"}`}>
             <div className="flex items-start justify-between gap-2">
-              <h3 className="text-sm font-bold text-[#0F172A] dark:text-white">
+              <h3 className="text-sm font-bold text-ink">
                 {notice.title}
               </h3>
               {!notice.is_read && (
-                <span className="w-2 h-2 rounded-full bg-[#0D2185] dark:bg-[#4C66F5] mt-1.5 flex-shrink-0" />
+                <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-500 mt-1.5 flex-shrink-0" />
               )}
             </div>
-            <p className="text-xs text-[#64748B] dark:text-[#94A3B8] line-clamp-2 mt-1 mb-2.5 leading-relaxed">
+            <p className="text-xs text-ink-muted line-clamp-2 mt-1 mb-2.5 leading-relaxed">
               {notice.body}
             </p>
             <button
               type="button"
               onClick={() => showComingSoon(`Notice Details: ${notice.title}`)}
-              className="text-xs font-semibold text-[#0D2185] dark:text-[#4C66F5] hover:underline"
+              className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline"
             >
               See more
             </button>

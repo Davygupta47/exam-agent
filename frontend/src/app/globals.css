@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Refined, crisp Light Mode */
+    /* Crisp, Modern Light Mode */
     --bg: #F8FAFC;
     --surface: #FFFFFF;
     --surface-raised: #FFFFFF;
@@ -12,15 +12,15 @@
     --border: #E2E8F0;
     --ink: #0F172A;
     --ink-muted: #64748B;
-    --primary: #0D2185;
-    --primary-hover: #081454;
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
     --primary-fg: #FFFFFF;
-    --tint: #EEF4FF;
-    --tint-ink: #1E3A8A;
-    --sidebar-gradient: linear-gradient(180deg, #1E2B63 0%, #0D163A 100%);
-    --sidebar-ink: #94A3B8;
-    --sidebar-active: #FFFFFF;
-    --banner: linear-gradient(115deg, #0A174E 0%, #0D2185 55%, #1E3A8A 100%);
+    --tint: #EFF6FF;
+    --tint-ink: #1E40AF;
+    --sidebar-gradient: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+    --sidebar-ink: #475569;
+    --sidebar-active: #2563EB;
+    --banner: linear-gradient(135deg, #1D4ED8 0%, #2563EB 50%, #3B82F6 100%);
     --success: #10B981;
     --warning: #F59E0B;
     --danger: #EF4444;
@@ -28,27 +28,27 @@
   }
 
   .dark {
-    /* Sleek Deep Space Dark Mode */
-    --bg: #070B1E;
-    --surface: #0E1535;
-    --surface-raised: #141D45;
-    --surface-muted: #182252;
-    --border: #1E2B63;
-    --ink: #F1F5F9;
-    --ink-muted: #94A3B8;
-    --primary: #4C66F5;
-    --primary-hover: #6178F7;
+    /* Sleek Deep Slate Dark Mode */
+    --bg: #0B0F19;
+    --surface: #111827;
+    --surface-raised: #1F2937;
+    --surface-muted: #1E293B;
+    --border: #1F2937;
+    --ink: #F9FAFB;
+    --ink-muted: #9CA3AF;
+    --primary: #3B82F6;
+    --primary-hover: #60A5FA;
     --primary-fg: #FFFFFF;
-    --tint: #162052;
-    --tint-ink: #DDE3FF;
-    --sidebar-gradient: linear-gradient(180deg, #162052 0%, #080D28 100%);
-    --sidebar-ink: #94A3B8;
-    --sidebar-active: #FFFFFF;
-    --banner: linear-gradient(115deg, #070D28 0%, #0D1C5C 55%, #182B78 100%);
+    --tint: rgba(30, 58, 138, 0.35);
+    --tint-ink: #93C5FD;
+    --sidebar-gradient: linear-gradient(180deg, #111827 0%, #0B0F19 100%);
+    --sidebar-ink: #9CA3AF;
+    --sidebar-active: #3B82F6;
+    --banner: linear-gradient(135deg, #1E1B4B 0%, #1E40AF 55%, #2563EB 100%);
     --success: #34D399;
     --warning: #FBBF24;
     --danger: #F87171;
-    --card-shadow: none;
+    --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
   }
 
   * {

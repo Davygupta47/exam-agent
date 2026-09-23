@@ -14,14 +14,14 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
 
   if (!mounted) {
     return (
-      <div className={`w-9 h-9 rounded-full bg-slate-100 dark:bg-[#1A2255] border border-slate-200 dark:border-[#232C63] ${className}`} />
+      <div className={`w-9 h-9 rounded-full bg-surface-muted border border-subtle ${className}`} />
     );
   }
 
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className={`relative p-2 rounded-full text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white bg-slate-100 dark:bg-[#1A2255] hover:bg-slate-200 dark:hover:bg-[#232C63] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0D2185] dark:focus-visible:ring-[#4C66F5] ${className}`}
+      className={`relative p-2 rounded-full text-ink-muted hover:text-ink bg-surface-muted hover:bg-slate-200 dark:hover:bg-slate-800 border border-subtle transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-500 ${className}`}
       aria-label="Toggle theme"
     >
       {theme === "dark" ? (

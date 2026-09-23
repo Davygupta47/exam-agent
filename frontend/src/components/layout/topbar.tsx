@@ -32,7 +32,7 @@ export function Topbar({ user, subtitle, onOpenMobileMenu }: TopbarProps) {
       <button
         type="button"
         onClick={onOpenMobileMenu}
-        className="lg:hidden p-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#141D45] transition-colors"
+        className="lg:hidden p-2 rounded-xl text-ink-muted hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
         aria-label="Open menu"
       >
         <Menu className="w-6 h-6" />
@@ -46,7 +46,7 @@ export function Topbar({ user, subtitle, onOpenMobileMenu }: TopbarProps) {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search"
-            className="w-full pl-11 pr-4 py-2.5 rounded-full bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] text-sm text-[#0F172A] dark:text-white placeholder-slate-400 dark:placeholder-slate-500 shadow-2xs focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5] transition-all"
+            className="w-full pl-11 pr-4 py-2.5 rounded-full bg-surface border border-subtle text-sm text-ink placeholder-slate-400 dark:placeholder-slate-500 shadow-2xs focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500 transition-all"
           />
           <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
         </div>
@@ -61,34 +61,34 @@ export function Topbar({ user, subtitle, onOpenMobileMenu }: TopbarProps) {
         <button
           type="button"
           onClick={() => showComingSoon("Notifications Center")}
-          className="relative p-2.5 rounded-full bg-white dark:bg-[#0E1535] border border-slate-200 dark:border-[#1E2B63] text-slate-700 dark:text-white hover:bg-slate-50 dark:hover:bg-[#141D45] shadow-2xs transition-colors"
+          className="relative p-2.5 rounded-full bg-surface border border-subtle text-ink-muted hover:text-ink hover:bg-slate-100 dark:hover:bg-slate-800 shadow-2xs transition-colors"
           aria-label="Notifications"
         >
           <Bell className="w-4 h-4" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-[#0E1535]" />
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-slate-900" />
         </button>
 
         {/* User Avatar & Name */}
         <Link
           href={`/${user?.role === "teacher" || user?.role === "hod" ? "faculty" : user?.role === "super_admin" || user?.role === "admin" ? "admin" : "student"}/profile`}
-          className="flex items-center gap-3 pl-2 pr-3 py-1 rounded-full bg-white/70 dark:bg-[#0E1535]/80 border border-slate-200/80 dark:border-[#1E2B63] hover:bg-slate-50 dark:hover:bg-[#141D45] transition-colors shadow-2xs"
+          className="flex items-center gap-3 pl-2 pr-3 py-1 rounded-full bg-surface border border-subtle hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shadow-2xs"
         >
           {user?.avatar_url ? (
             <img
               src={user.avatar_url}
               alt={user.full_name}
-              className="w-10 h-10 rounded-full object-cover ring-2 ring-[#0D2185] dark:ring-[#4C66F5]"
+              className="w-10 h-10 rounded-full object-cover ring-2 ring-blue-600 dark:ring-blue-500"
             />
           ) : (
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0D2185] to-[#4C66F5] text-white font-semibold text-xs flex items-center justify-center ring-2 ring-[#0D2185] dark:ring-[#4C66F5]">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-semibold text-xs flex items-center justify-center ring-2 ring-blue-600 dark:ring-blue-500">
               {initials}
             </div>
           )}
           <div className="hidden sm:block text-left">
-            <h2 className="text-sm font-bold text-[#0F172A] dark:text-white leading-tight">
+            <h2 className="text-sm font-bold text-ink leading-tight">
               {user?.full_name || "User"}
             </h2>
-            <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">
+            <p className="text-xs text-ink-muted">
               {subtitle || (user?.role ? user.role.toUpperCase() : "Member")}
             </p>
           </div>

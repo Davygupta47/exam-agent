@@ -77,14 +77,14 @@ export function Sidebar({ role = "student", user, onCloseMobile }: SidebarProps)
         : studentNavItems;
 
   return (
-    <aside className="w-64 h-[calc(100vh-2rem)] my-4 ml-4 rounded-[28px] sidebar-gradient text-white flex flex-col justify-between p-6 shadow-2xl flex-shrink-0 select-none overflow-hidden">
+    <aside className="w-64 h-[calc(100vh-2rem)] my-4 ml-4 rounded-[28px] bg-surface border border-subtle text-ink flex flex-col justify-between p-6 soft-shadow flex-shrink-0 select-none overflow-hidden">
       {/* Top Logo */}
       <div className="flex-1 flex flex-col min-h-0">
         <div className="flex items-center gap-3 px-2 py-3 mb-4 flex-shrink-0">
-          <div className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center shadow-inner border border-white/20">
+          <div className="w-12 h-12 rounded-2xl bg-blue-600 dark:bg-blue-500 text-white flex items-center justify-center shadow-md shadow-blue-500/20">
             {/* Logo mark matching reference: graduation cap */}
             <svg
-              className="w-8 h-8 text-white"
+              className="w-7 h-7 text-white"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
@@ -92,10 +92,10 @@ export function Sidebar({ role = "student", user, onCloseMobile }: SidebarProps)
             </svg>
           </div>
           <div>
-            <h1 className="font-semibold text-base leading-tight tracking-wide text-white">
+            <h1 className="font-bold text-base leading-tight tracking-tight text-ink">
               Campus Portal
             </h1>
-            <p className="text-xs text-[#7F8DC9] capitalize">{role} Portal</p>
+            <p className="text-xs text-ink-muted capitalize">{role} Portal</p>
           </div>
         </div>
 
@@ -112,11 +112,11 @@ export function Sidebar({ role = "student", user, onCloseMobile }: SidebarProps)
                   href={item.href}
                   onClick={onCloseMobile}
                   className={`flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-medium transition-all ${isActive
-                      ? "bg-white/15 text-white font-semibold shadow-sm backdrop-blur-sm"
-                      : "text-[#8C97D6] hover:text-white hover:bg-white/10"
+                      ? "bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-semibold shadow-xs"
+                      : "text-ink-muted hover:text-ink hover:bg-slate-100 dark:hover:bg-slate-800/50"
                     }`}
                 >
-                  <Icon className={`w-5 h-5 ${isActive ? "text-white" : "text-[#8C97D6]"}`} />
+                  <Icon className={`w-5 h-5 ${isActive ? "text-blue-600 dark:text-blue-400" : "text-ink-muted"}`} />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -127,9 +127,9 @@ export function Sidebar({ role = "student", user, onCloseMobile }: SidebarProps)
                 key={item.label}
                 type="button"
                 onClick={() => showComingSoon(item.label)}
-                className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-medium text-[#8C97D6] hover:text-white hover:bg-white/10 transition-all text-left"
+                className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-medium text-ink-muted hover:text-ink hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all text-left"
               >
-                <Icon className="w-5 h-5 text-[#8C97D6]" />
+                <Icon className="w-5 h-5 text-ink-muted" />
                 <span>{item.label}</span>
               </button>
             );
@@ -138,12 +138,12 @@ export function Sidebar({ role = "student", user, onCloseMobile }: SidebarProps)
       </div>
 
       {/* Logout Button Pinned to Bottom */}
-      <div className="pt-4 border-t border-white/10">
+      <div className="pt-4 border-t border-subtle">
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-medium text-[#8C97D6] hover:text-white hover:bg-white/10 transition-all"
+          className="w-full flex items-center gap-3.5 px-4 py-3 rounded-2xl text-sm font-medium text-ink-muted hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-all"
         >
-          <LogOut className="w-5 h-5 text-[#8C97D6]" />
+          <LogOut className="w-5 h-5 text-ink-muted group-hover:text-red-600" />
           <span>Logout</span>
         </button>
       </div>

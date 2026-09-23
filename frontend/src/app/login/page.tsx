@@ -139,7 +139,7 @@ function LoginForm() {
                 type="button"
                 onClick={() => handleRoleChange("student")}
                 className={`py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${role === "student"
-                  ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
+                  ? "bg-blue-600 dark:bg-blue-500 text-white shadow-xs"
                   : "text-ink-muted hover:text-ink"
                   }`}
               >
@@ -149,7 +149,7 @@ function LoginForm() {
                 type="button"
                 onClick={() => handleRoleChange("faculty")}
                 className={`py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${role === "faculty"
-                  ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
+                  ? "bg-blue-600 dark:bg-blue-500 text-white shadow-xs"
                   : "text-ink-muted hover:text-ink"
                   }`}
               >
@@ -159,7 +159,7 @@ function LoginForm() {
                 type="button"
                 onClick={() => handleRoleChange("admin")}
                 className={`py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${role === "admin"
-                  ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
+                  ? "bg-blue-600 dark:bg-blue-500 text-white shadow-xs"
                   : "text-ink-muted hover:text-ink"
                   }`}
               >
@@ -190,7 +190,7 @@ function LoginForm() {
                   placeholder={identifierPlaceholder}
                   required
                   autoFocus
-                  className="w-full px-4 py-3 rounded-xl bg-surface border border-subtle text-sm text-ink placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5] transition-all"
+                  className="w-full px-4 py-3 rounded-xl bg-surface border border-subtle text-sm text-ink placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500 transition-all"
                 />
               </div>
             </div>
@@ -209,7 +209,7 @@ function LoginForm() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
                   required
-                  className="w-full pl-4 pr-11 py-3 rounded-xl bg-surface border border-subtle text-sm text-ink placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5] transition-all"
+                  className="w-full pl-4 pr-11 py-3 rounded-xl bg-surface border border-subtle text-sm text-ink placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500 transition-all"
                 />
                 <button
                   type="button"
@@ -230,7 +230,7 @@ function LoginForm() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 px-6 rounded-full text-sm font-semibold bg-[#0D2185] hover:bg-[#0A1A6B] dark:bg-[#4C66F5] dark:hover:bg-[#6178F7] text-white shadow-md transition-all active:scale-98 disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-6 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white shadow-md transition-all active:scale-98 disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>

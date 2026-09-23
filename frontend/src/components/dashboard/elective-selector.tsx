@@ -175,9 +175,9 @@ export function ElectiveSelector({
 
   if (loading) {
     return (
-      <div className="p-6 rounded-[22px] bg-white dark:bg-[#0F1538] border border-[#E4E8F5] dark:border-[#232C63] animate-pulse">
-        <div className="h-6 w-48 bg-slate-200 dark:bg-[#1A2255] rounded-md mb-4" />
-        <div className="h-20 bg-slate-100 dark:bg-[#1A2255] rounded-xl" />
+      <div className="p-6 rounded-[22px] bg-surface border border-subtle animate-pulse">
+        <div className="h-6 w-48 bg-slate-200 dark:bg-slate-800 rounded-md mb-4" />
+        <div className="h-20 bg-slate-100 dark:bg-slate-800 rounded-xl" />
       </div>
     );
   }
@@ -189,10 +189,10 @@ export function ElectiveSelector({
   // ── Allocation Results View ──
   if (hasAllocations) {
     return (
-      <div className="mt-8 p-6 rounded-[24px] bg-white dark:bg-[#0F1538] border border-[#E4E8F5] dark:border-[#232C63] soft-shadow">
+      <div className="mt-8 p-6 rounded-[24px] bg-surface border border-subtle soft-shadow">
         <div className="flex items-center gap-2 mb-5">
           <Trophy className="w-5 h-5 text-emerald-500" />
-          <h2 className="text-base font-semibold text-[#0E1330] dark:text-[#EAEDFB]">
+          <h2 className="text-base font-semibold text-ink">
             Elective Allocation Results
           </h2>
         </div>
@@ -237,26 +237,26 @@ export function ElectiveSelector({
   }
 
   return (
-    <div className="mt-8 p-6 rounded-[24px] bg-white dark:bg-[#0F1538] border border-[#E4E8F5] dark:border-[#232C63] soft-shadow">
+    <div className="mt-8 p-6 rounded-[24px] bg-surface border border-subtle soft-shadow">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
         <div>
-          <h2 className="text-base font-semibold text-[#0E1330] dark:text-[#EAEDFB] flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-[#0D2185] dark:text-[#4C66F5]" />
+          <h2 className="text-base font-semibold text-ink flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             Elective Course Selection
           </h2>
-          <p className="text-xs text-[#6B7194] dark:text-[#8C95C6] mt-0.5">
+          <p className="text-xs text-ink-muted mt-0.5">
             Submit your ordered preferences for Semester {semester} electives.
           </p>
         </div>
 
         {/* Countdown Timer */}
         {isWindowOpen && (
-          <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#0D2185]/10 to-[#4C66F5]/10 dark:from-[#4C66F5]/20 dark:to-[#6178F7]/20 border border-[#0D2185]/20 dark:border-[#4C66F5]/30">
-            <Clock className="w-4 h-4 text-[#0D2185] dark:text-[#4C66F5] animate-pulse" />
-            <span className="text-sm font-bold text-[#0D2185] dark:text-[#4C66F5] tabular-nums">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800">
+            <Clock className="w-4 h-4 text-blue-600 dark:text-blue-400 animate-pulse" />
+            <span className="text-sm font-bold text-blue-600 dark:text-blue-400 tabular-nums">
               {formatTime(timeRemaining)}
             </span>
-            <span className="text-xs text-[#6B7194] dark:text-[#8C95C6]">
+            <span className="text-xs text-ink-muted">
               remaining
             </span>
           </div>
@@ -273,9 +273,9 @@ export function ElectiveSelector({
         )}
 
         {!electiveWindow && (
-          <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-slate-200 dark:border-[#232C63]">
-            <Clock className="w-4 h-4 text-[#6B7194]" />
-            <span className="text-xs font-medium text-[#6B7194] dark:text-[#8C95C6]">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-subtle">
+            <Clock className="w-4 h-4 text-ink-muted" />
+            <span className="text-xs font-medium text-ink-muted">
               No elective window is currently open
             </span>
           </div>
@@ -283,7 +283,7 @@ export function ElectiveSelector({
       </div>
 
       {/* Elective Category Switcher */}
-      <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-[#1A2255] mb-5 w-fit">
+      <div className="flex items-center gap-1.5 p-1 rounded-xl bg-surface-muted border border-subtle mb-5 w-fit">
         <button
           type="button"
           onClick={() => {
@@ -292,8 +292,8 @@ export function ElectiveSelector({
           }}
           className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             selectedType === "PROFESSIONAL_ELECTIVE_I"
-              ? "bg-white dark:bg-[#0D2185] text-[#0D2185] dark:text-white shadow-xs"
-              : "text-[#6B7194] dark:text-[#8C95C6] hover:text-slate-900 dark:hover:text-white"
+              ? "bg-blue-600 text-white shadow-xs"
+              : "text-ink-muted hover:text-ink"
           }`}
         >
           PE-I
@@ -306,8 +306,8 @@ export function ElectiveSelector({
           }}
           className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             selectedType === "PROFESSIONAL_ELECTIVE_II"
-              ? "bg-white dark:bg-[#0D2185] text-[#0D2185] dark:text-white shadow-xs"
-              : "text-[#6B7194] dark:text-[#8C95C6] hover:text-slate-900 dark:hover:text-white"
+              ? "bg-blue-600 text-white shadow-xs"
+              : "text-ink-muted hover:text-ink"
           }`}
         >
           PE-II
@@ -320,8 +320,8 @@ export function ElectiveSelector({
           }}
           className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             selectedType === "OPEN_ELECTIVE_I"
-              ? "bg-white dark:bg-[#0D2185] text-[#0D2185] dark:text-white shadow-xs"
-              : "text-[#6B7194] dark:text-[#8C95C6] hover:text-slate-900 dark:hover:text-white"
+              ? "bg-blue-600 text-white shadow-xs"
+              : "text-ink-muted hover:text-ink"
           }`}
         >
           Open Elective
@@ -349,7 +349,7 @@ export function ElectiveSelector({
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {/* Preference 1 */}
           <div>
-            <label className="block text-xs font-medium text-[#0E1330] dark:text-[#EAEDFB] mb-1.5">
+            <label className="block text-xs font-medium text-ink mb-1.5">
               1st Preference (Primary)
             </label>
             <select
@@ -357,7 +357,7 @@ export function ElectiveSelector({
               onChange={(e) => setPref1(e.target.value)}
               required
               disabled={!isWindowOpen}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-[#E4E8F5] dark:border-[#232C63] text-xs text-[#0E1330] dark:text-[#EAEDFB] focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <option value="">Choose 1st choice...</option>
               {currentOptions.map((opt) => (
@@ -370,7 +370,7 @@ export function ElectiveSelector({
 
           {/* Preference 2 */}
           <div>
-            <label className="block text-xs font-medium text-[#0E1330] dark:text-[#EAEDFB] mb-1.5">
+            <label className="block text-xs font-medium text-ink mb-1.5">
               2nd Preference
             </label>
             <select
@@ -378,7 +378,7 @@ export function ElectiveSelector({
               onChange={(e) => setPref2(e.target.value)}
               required
               disabled={!isWindowOpen}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-[#E4E8F5] dark:border-[#232C63] text-xs text-[#0E1330] dark:text-[#EAEDFB] focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <option value="">Choose 2nd choice...</option>
               {currentOptions.map((opt) => (
@@ -391,7 +391,7 @@ export function ElectiveSelector({
 
           {/* Preference 3 */}
           <div>
-            <label className="block text-xs font-medium text-[#0E1330] dark:text-[#EAEDFB] mb-1.5">
+            <label className="block text-xs font-medium text-ink mb-1.5">
               3rd Preference
             </label>
             <select
@@ -399,7 +399,7 @@ export function ElectiveSelector({
               onChange={(e) => setPref3(e.target.value)}
               required
               disabled={!isWindowOpen}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-[#E4E8F5] dark:border-[#232C63] text-xs text-[#0E1330] dark:text-[#EAEDFB] focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5] disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <option value="">Choose 3rd choice...</option>
               {currentOptions.map((opt) => (
@@ -415,7 +415,7 @@ export function ElectiveSelector({
           <button
             type="submit"
             disabled={submitting || !isWindowOpen}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold bg-[#0D2185] hover:bg-[#0A1A6B] dark:bg-[#4C66F5] dark:hover:bg-[#6178F7] text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xs"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-xs"
           >
             <Send className="w-3.5 h-3.5" />
             <span>{submitting ? "Submitting..." : "Submit Preferences"}</span>

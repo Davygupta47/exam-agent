@@ -102,7 +102,7 @@ export default function FacultyProfilePage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-page flex items-center justify-center">
-        <div className="w-8 h-8 border-3 border-[#0D2185] dark:border-[#4C66F5] border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-3 border-blue-600 dark:border-blue-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -144,10 +144,10 @@ export default function FacultyProfilePage() {
                 <img
                   src={profile?.photo_url || user?.avatar_url || ""}
                   alt={profile?.name || "Faculty"}
-                  className="w-24 h-24 rounded-full object-cover ring-4 ring-[#0D2185] dark:ring-[#4C66F5]"
+                  className="w-24 h-24 rounded-full object-cover ring-4 ring-blue-600 dark:ring-blue-500"
                 />
               ) : (
-                <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-[#0D2185] to-[#4C66F5] text-white font-bold text-2xl flex items-center justify-center ring-4 ring-[#0D2185] dark:ring-[#4C66F5]">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold text-2xl flex items-center justify-center ring-4 ring-blue-600 dark:ring-blue-500">
                   {profile?.name ? profile.name.slice(0, 2).toUpperCase() : "FC"}
                 </div>
               )}
@@ -156,7 +156,7 @@ export default function FacultyProfilePage() {
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={uploading}
-                className="absolute bottom-0 right-0 p-2 rounded-full bg-[#0D2185] text-white hover:bg-[#0A1A6B] shadow-md transition-all"
+                className="absolute bottom-0 right-0 p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 shadow-md transition-all"
                 title="Upload profile picture"
               >
                 <Camera className="w-4 h-4" />
@@ -184,27 +184,27 @@ export default function FacultyProfilePage() {
           <form onSubmit={handleSave} className="pt-8 space-y-6">
             <div>
               <h3 className="text-sm font-semibold text-ink mb-4 flex items-center gap-2">
-                <Lock className="w-4 h-4 text-[#6B7194]" />
+                <Lock className="w-4 h-4 text-ink-muted" />
                 <span>Verified Faculty Designation (Managed by Administrator)</span>
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#1A2255]/50 border border-subtle">
+                <div className="p-3.5 rounded-xl bg-surface-muted border border-subtle">
                   <label className="block text-[11px] text-ink-muted">Faculty ID</label>
                   <p className="text-sm font-semibold text-ink mt-0.5">{profile?.teacher_code}</p>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#1A2255]/50 border border-subtle">
+                <div className="p-3.5 rounded-xl bg-surface-muted border border-subtle">
                   <label className="block text-[11px] text-ink-muted">Designation</label>
                   <p className="text-sm font-semibold text-ink mt-0.5">{profile?.designation}</p>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#1A2255]/50 border border-subtle">
+                <div className="p-3.5 rounded-xl bg-surface-muted border border-subtle">
                   <label className="block text-[11px] text-ink-muted">Department</label>
                   <p className="text-sm font-semibold text-ink mt-0.5">{profile?.department_name}</p>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#1A2255]/50 border border-subtle">
+                <div className="p-3.5 rounded-xl bg-surface-muted border border-subtle">
                   <label className="block text-[11px] text-ink-muted">Official Email</label>
                   <p className="text-sm font-semibold text-ink mt-0.5 truncate">{profile?.email}</p>
                 </div>
@@ -222,7 +222,7 @@ export default function FacultyProfilePage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+91 9876543210"
-                    className="w-full px-4 py-2.5 rounded-xl bg-surface border border-subtle text-sm text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-surface border border-subtle text-sm text-ink focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                   />
                 </div>
 
@@ -233,7 +233,7 @@ export default function FacultyProfilePage() {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     placeholder="Department Cabin, Building"
-                    className="w-full px-4 py-2.5 rounded-xl bg-surface border border-subtle text-sm text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-surface border border-subtle text-sm text-ink focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                   />
                 </div>
 
@@ -244,7 +244,7 @@ export default function FacultyProfilePage() {
                     value={bio}
                     onChange={(e) => setBio(e.target.value)}
                     placeholder="Brief description of research areas, office hours, or publications..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-surface border border-subtle text-sm text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                    className="w-full px-4 py-2.5 rounded-xl bg-surface border border-subtle text-sm text-ink focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                   />
                 </div>
               </div>
@@ -254,7 +254,7 @@ export default function FacultyProfilePage() {
               <button
                 type="submit"
                 disabled={saving}
-                className="flex items-center gap-2 px-7 py-3 rounded-full text-xs font-semibold bg-[#0D2185] hover:bg-[#0A1A6B] dark:bg-[#4C66F5] dark:hover:bg-[#6178F7] text-white shadow-md transition-all active:scale-98 disabled:opacity-50"
+                className="flex items-center gap-2 px-7 py-3 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white shadow-md transition-all active:scale-98 disabled:opacity-50"
               >
                 <Save className="w-4 h-4" />
                 <span>{saving ? "Saving changes..." : "Save changes"}</span>

@@ -313,7 +313,7 @@ export default function AdminDashboardPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-page flex items-center justify-center">
-        <div className="w-8 h-8 border-3 border-[#0D2185] dark:border-[#4C66F5] border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-3 border-blue-600 dark:border-blue-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -329,11 +329,11 @@ export default function AdminDashboardPage() {
         <StatCards stats={stats} title="System Overview & Totals" />
 
         {/* ─── Elective Management Panel ─── */}
-        <div className="mb-8 p-6 rounded-[24px] bg-white dark:bg-[#0F1538] border border-[#E4E8F5] dark:border-[#232C63] soft-shadow">
+        <div className="mb-8 p-6 rounded-[24px] bg-surface border border-subtle soft-shadow">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[#0D2185] dark:text-[#4C66F5]" />
-              <h2 className="text-base font-semibold text-[#0E1330] dark:text-[#EAEDFB]">
+              <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <h2 className="text-base font-semibold text-ink">
                 Elective Allocation Management
               </h2>
               <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300">
@@ -343,12 +343,12 @@ export default function AdminDashboardPage() {
 
             {/* Live countdown */}
             {electiveWindow?.status === "OPEN" && electiveTimeRemaining > 0 && (
-              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#0D2185]/10 to-[#4C66F5]/10 dark:from-[#4C66F5]/20 dark:to-[#6178F7]/20 border border-[#0D2185]/20 dark:border-[#4C66F5]/30">
-                <Clock className="w-4 h-4 text-[#0D2185] dark:text-[#4C66F5] animate-pulse" />
-                <span className="text-sm font-bold text-[#0D2185] dark:text-[#4C66F5] tabular-nums">
+              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800">
+                <Clock className="w-4 h-4 text-blue-600 dark:text-blue-400 animate-pulse" />
+                <span className="text-sm font-bold text-blue-600 dark:text-blue-400 tabular-nums">
                   {formatElectiveTime(electiveTimeRemaining)}
                 </span>
-                <span className="text-xs text-[#6B7194] dark:text-[#8C95C6]">remaining</span>
+                <span className="text-xs text-ink-muted">remaining</span>
               </div>
             )}
           </div>
@@ -366,21 +366,21 @@ export default function AdminDashboardPage() {
 
           {/* Stats Row */}
           <div className="grid grid-cols-3 gap-4 mb-5">
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-[#E4E8F5] dark:border-[#232C63]">
-              <p className="text-[11px] font-medium text-[#6B7194] dark:text-[#8C95C6] mb-1">Window Status</p>
-              <p className="text-sm font-bold text-[#0E1330] dark:text-[#EAEDFB]">
+            <div className="p-4 rounded-xl bg-surface-muted border border-subtle">
+              <p className="text-[11px] font-medium text-ink-muted mb-1">Window Status</p>
+              <p className="text-sm font-bold text-ink">
                 {electiveWindow?.status === "OPEN" ? "🟢 Open" : electiveWindow?.status === "ALLOCATED" ? "✅ Allocated" : electiveWindow?.status === "CLOSED" ? "🟡 Closed" : "⚪ Not Started"}
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-[#E4E8F5] dark:border-[#232C63]">
-              <p className="text-[11px] font-medium text-[#6B7194] dark:text-[#8C95C6] mb-1">Preferences Submitted</p>
-              <p className="text-sm font-bold text-[#0E1330] dark:text-[#EAEDFB]">
-                {electiveSubmitted} <span className="text-xs font-normal text-[#6B7194]">/ {electiveTotal} students</span>
+            <div className="p-4 rounded-xl bg-surface-muted border border-subtle">
+              <p className="text-[11px] font-medium text-ink-muted mb-1">Preferences Submitted</p>
+              <p className="text-sm font-bold text-ink">
+                {electiveSubmitted} <span className="text-xs font-normal text-ink-muted">/ {electiveTotal} students</span>
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-[#E4E8F5] dark:border-[#232C63]">
-              <p className="text-[11px] font-medium text-[#6B7194] dark:text-[#8C95C6] mb-1">Students Allocated</p>
-              <p className="text-sm font-bold text-[#0E1330] dark:text-[#EAEDFB]">{electiveAllocated}</p>
+            <div className="p-4 rounded-xl bg-surface-muted border border-subtle">
+              <p className="text-[11px] font-medium text-ink-muted mb-1">Students Allocated</p>
+              <p className="text-sm font-bold text-ink">{electiveAllocated}</p>
             </div>
           </div>
 
@@ -390,7 +390,7 @@ export default function AdminDashboardPage() {
               type="button"
               onClick={handleOpenWindow}
               disabled={electiveLoading || electiveWindow?.status === "OPEN"}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-[#0D2185] hover:bg-[#0A1A6B] dark:bg-[#4C66F5] dark:hover:bg-[#6178F7] text-white shadow-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white shadow-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Clock className="w-3.5 h-3.5" />
               <span>Open 5-min Window</span>
@@ -410,7 +410,7 @@ export default function AdminDashboardPage() {
               type="button"
               onClick={handleDownloadCSV}
               disabled={electiveWindow?.status !== "ALLOCATED"}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white dark:bg-[#1A2255] hover:bg-slate-50 dark:hover:bg-[#232C63] border border-[#E4E8F5] dark:border-[#232C63] text-[#0E1330] dark:text-[#EAEDFB] shadow-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-surface hover:bg-surface-muted border border-subtle text-ink shadow-xs transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Download test.csv</span>
@@ -426,7 +426,7 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab("students")}
               className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all ${
                 activeTab === "students"
-                  ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
+                  ? "bg-blue-600 dark:bg-blue-500 text-white shadow-xs"
                   : "text-ink-muted hover:text-ink"
               }`}
             >
@@ -437,7 +437,7 @@ export default function AdminDashboardPage() {
               onClick={() => setActiveTab("teachers")}
               className={`px-5 py-2 rounded-xl text-xs font-semibold transition-all ${
                 activeTab === "teachers"
-                  ? "bg-[#0D2185] dark:bg-[#4C66F5] text-white shadow-xs"
+                  ? "bg-blue-600 dark:bg-blue-500 text-white shadow-xs"
                   : "text-ink-muted hover:text-ink"
               }`}
             >
@@ -449,7 +449,7 @@ export default function AdminDashboardPage() {
             <button
               type="button"
               onClick={() => { setShowAddStudent(true); setFormError(null); }}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-[#0D2185] hover:bg-[#0A1A6B] dark:bg-[#4C66F5] dark:hover:bg-[#6178F7] text-white shadow-xs transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white shadow-xs transition-colors"
             >
               <UserPlus className="w-4 h-4" />
               <span>Add student</span>
@@ -457,7 +457,7 @@ export default function AdminDashboardPage() {
             <button
               type="button"
               onClick={() => { setShowAddTeacher(true); setFormError(null); }}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-white dark:bg-[#0F1538] hover:bg-slate-50 dark:hover:bg-[#1A2255] border border-subtle text-ink shadow-xs transition-colors"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-surface hover:bg-surface-muted border border-subtle text-ink shadow-xs transition-colors"
             >
               <GraduationCap className="w-4 h-4" />
               <span>Add teacher</span>
@@ -475,7 +475,7 @@ export default function AdminDashboardPage() {
                   value={studentSearch}
                   onChange={(e) => { setStudentSearch(e.target.value); setStudentPage(1); }}
                   placeholder="Search students by name or roll..."
-                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               </div>
@@ -488,7 +488,7 @@ export default function AdminDashboardPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-subtle bg-slate-50/50 dark:bg-[#1A2255]/30 text-[11px] font-semibold text-ink-muted uppercase tracking-wider">
+                  <tr className="border-b border-subtle bg-surface-muted text-[11px] font-semibold text-ink-muted uppercase tracking-wider">
                     <th className="py-3.5 px-6">Name</th>
                     <th className="py-3.5 px-6">Roll Numbers</th>
                     <th className="py-3.5 px-6">Department</th>
@@ -498,7 +498,7 @@ export default function AdminDashboardPage() {
                 </thead>
                 <tbody className="divide-y divide-subtle text-xs text-ink">
                   {students.map((s) => (
-                    <tr key={s.id} className="hover:bg-slate-50/50 dark:hover:bg-[#1A2255]/20 transition-colors">
+                    <tr key={s.id} className="hover:bg-surface-muted/50 transition-colors">
                       <td className="py-3.5 px-6">
                         <div className="font-semibold text-ink">{s.name}</div>
                         <div className="text-[11px] text-ink-muted">{s.email}</div>
@@ -529,7 +529,7 @@ export default function AdminDashboardPage() {
                 type="button"
                 onClick={() => setStudentPage((p) => Math.max(1, p - 1))}
                 disabled={studentPage === 1}
-                className="flex items-center gap-1 px-4 py-2 rounded-xl text-xs font-semibold text-ink hover:bg-slate-100 dark:hover:bg-[#1A2255] disabled:opacity-40"
+                className="flex items-center gap-1 px-4 py-2 rounded-xl text-xs font-semibold text-ink hover:bg-surface-muted disabled:opacity-40"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>Previous</span>
@@ -538,7 +538,7 @@ export default function AdminDashboardPage() {
                 type="button"
                 onClick={() => setStudentPage((p) => Math.min(studentTotalPages, p + 1))}
                 disabled={studentPage === studentTotalPages}
-                className="flex items-center gap-1 px-4 py-2 rounded-xl text-xs font-semibold text-ink hover:bg-slate-100 dark:hover:bg-[#1A2255] disabled:opacity-40"
+                className="flex items-center gap-1 px-4 py-2 rounded-xl text-xs font-semibold text-ink hover:bg-surface-muted disabled:opacity-40"
               >
                 <span>Next</span>
                 <ChevronRight className="w-4 h-4" />
@@ -557,7 +557,7 @@ export default function AdminDashboardPage() {
                   value={teacherSearch}
                   onChange={(e) => { setTeacherSearch(e.target.value); setTeacherPage(1); }}
                   placeholder="Search faculty by name or code..."
-                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                  className="w-full pl-10 pr-4 py-2 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
               </div>
@@ -570,7 +570,7 @@ export default function AdminDashboardPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-subtle bg-slate-50/50 dark:bg-[#1A2255]/30 text-[11px] font-semibold text-ink-muted uppercase tracking-wider">
+                  <tr className="border-b border-subtle bg-surface-muted text-[11px] font-semibold text-ink-muted uppercase tracking-wider">
                     <th className="py-3.5 px-6">Faculty Name</th>
                     <th className="py-3.5 px-6">Teacher Code</th>
                     <th className="py-3.5 px-6">Department</th>
@@ -579,7 +579,7 @@ export default function AdminDashboardPage() {
                 </thead>
                 <tbody className="divide-y divide-subtle text-xs text-ink">
                   {teachers.map((t) => (
-                    <tr key={t.id} className="hover:bg-slate-50/50 dark:hover:bg-[#1A2255]/20 transition-colors">
+                    <tr key={t.id} className="hover:bg-surface-muted/50 transition-colors">
                       <td className="py-3.5 px-6">
                         <div className="font-semibold text-ink">{t.name}</div>
                         <div className="text-[11px] text-ink-muted">{t.email}</div>
@@ -606,7 +606,7 @@ export default function AdminDashboardPage() {
                 type="button"
                 onClick={() => setTeacherPage((p) => Math.max(1, p - 1))}
                 disabled={teacherPage === 1}
-                className="flex items-center gap-1 px-4 py-2 rounded-xl text-xs font-semibold text-ink hover:bg-slate-100 dark:hover:bg-[#1A2255] disabled:opacity-40"
+                className="flex items-center gap-1 px-4 py-2 rounded-xl text-xs font-semibold text-ink hover:bg-surface-muted disabled:opacity-40"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>Previous</span>
@@ -615,7 +615,7 @@ export default function AdminDashboardPage() {
                 type="button"
                 onClick={() => setTeacherPage((p) => Math.min(teacherTotalPages, p + 1))}
                 disabled={teacherPage === teacherTotalPages}
-                className="flex items-center gap-1 px-4 py-2 rounded-xl text-xs font-semibold text-ink hover:bg-slate-100 dark:hover:bg-[#1A2255] disabled:opacity-40"
+                className="flex items-center gap-1 px-4 py-2 rounded-xl text-xs font-semibold text-ink hover:bg-surface-muted disabled:opacity-40"
               >
                 <span>Next</span>
                 <ChevronRight className="w-4 h-4" />
@@ -660,7 +660,7 @@ export default function AdminDashboardPage() {
                       value={newStudent.name}
                       onChange={(e) => setNewStudent({ ...newStudent, name: e.target.value })}
                       placeholder="e.g. Suman Sengupta"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
@@ -673,7 +673,7 @@ export default function AdminDashboardPage() {
                         value={newStudent.college_roll_no}
                         onChange={(e) => setNewStudent({ ...newStudent, college_roll_no: e.target.value })}
                         placeholder="e.g. 2310018150"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                     <div>
@@ -684,7 +684,7 @@ export default function AdminDashboardPage() {
                         value={newStudent.autonomy_roll_no}
                         onChange={(e) => setNewStudent({ ...newStudent, autonomy_roll_no: e.target.value })}
                         placeholder="e.g. 12623018150"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                   </div>
@@ -697,7 +697,7 @@ export default function AdminDashboardPage() {
                       value={newStudent.registration_no}
                       onChange={(e) => setNewStudent({ ...newStudent, registration_no: e.target.value })}
                       placeholder="e.g. Reg_12623018150"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
@@ -709,7 +709,7 @@ export default function AdminDashboardPage() {
                       value={newStudent.email}
                       onChange={(e) => setNewStudent({ ...newStudent, email: e.target.value })}
                       placeholder="student@heritageit.edu"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
@@ -719,7 +719,7 @@ export default function AdminDashboardPage() {
                       <select
                         value={newStudent.department_id}
                         onChange={(e) => setNewStudent({ ...newStudent, department_id: e.target.value })}
-                        className="w-full px-3 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                        className="w-full px-3 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         {departments.map((d) => (
                           <option key={d.id} value={d.id}>
@@ -737,7 +737,7 @@ export default function AdminDashboardPage() {
                         max={8}
                         value={newStudent.current_semester}
                         onChange={(e) => setNewStudent({ ...newStudent, current_semester: parseInt(e.target.value, 10) || 5 })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                   </div>
@@ -752,7 +752,7 @@ export default function AdminDashboardPage() {
                       value={newStudent.second_year_gpa}
                       onChange={(e) => setNewStudent({ ...newStudent, second_year_gpa: e.target.value })}
                       placeholder="e.g. 8.75"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </form>
@@ -770,7 +770,7 @@ export default function AdminDashboardPage() {
                   type="submit"
                   form="student-form"
                   disabled={formSubmitting}
-                  className="px-7 py-2.5 rounded-full text-xs font-semibold bg-[#0D2185] hover:bg-[#0A1A6B] dark:bg-[#4C66F5] text-white disabled:opacity-50"
+                  className="px-7 py-2.5 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 text-white disabled:opacity-50"
                 >
                   {formSubmitting ? "Creating..." : "Save Student"}
                 </button>
@@ -815,7 +815,7 @@ export default function AdminDashboardPage() {
                       value={newTeacher.name}
                       onChange={(e) => setNewTeacher({ ...newTeacher, name: e.target.value })}
                       placeholder="e.g. Prof. Arpita Roy"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
@@ -828,7 +828,7 @@ export default function AdminDashboardPage() {
                         value={newTeacher.teacher_code}
                         onChange={(e) => setNewTeacher({ ...newTeacher, teacher_code: e.target.value })}
                         placeholder="e.g. AIML10"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                     <div>
@@ -838,7 +838,7 @@ export default function AdminDashboardPage() {
                         value={newTeacher.initials}
                         onChange={(e) => setNewTeacher({ ...newTeacher, initials: e.target.value })}
                         placeholder="e.g. AR"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                   </div>
@@ -851,7 +851,7 @@ export default function AdminDashboardPage() {
                       value={newTeacher.email}
                       onChange={(e) => setNewTeacher({ ...newTeacher, email: e.target.value })}
                       placeholder="arpita.roy@heritageit.edu"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
 
@@ -860,7 +860,7 @@ export default function AdminDashboardPage() {
                     <select
                       value={newTeacher.department_id}
                       onChange={(e) => setNewTeacher({ ...newTeacher, department_id: e.target.value })}
-                      className="w-full px-3 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                      className="w-full px-3 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                       {departments.map((d) => (
                         <option key={d.id} value={d.id}>
@@ -878,7 +878,7 @@ export default function AdminDashboardPage() {
                       value={newTeacher.designation}
                       onChange={(e) => setNewTeacher({ ...newTeacher, designation: e.target.value })}
                       placeholder="Assistant Professor"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-[#0D2185] dark:focus:ring-[#4C66F5]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-surface-muted border border-subtle text-xs text-ink focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </form>
@@ -896,7 +896,7 @@ export default function AdminDashboardPage() {
                   type="submit"
                   form="teacher-form"
                   disabled={formSubmitting}
-                  className="px-7 py-2.5 rounded-full text-xs font-semibold bg-[#0D2185] hover:bg-[#0A1A6B] dark:bg-[#4C66F5] text-white disabled:opacity-50"
+                  className="px-7 py-2.5 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 text-white disabled:opacity-50"
                 >
                   {formSubmitting ? "Creating..." : "Save Faculty"}
                 </button>
@@ -918,7 +918,7 @@ export default function AdminDashboardPage() {
                 Share this temporary password with the user. It will not be shown again.
               </p>
 
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#1A2255] border border-subtle text-left mb-6 space-y-2">
+              <div className="p-4 rounded-xl bg-surface-muted border border-subtle text-left mb-6 space-y-2">
                 <div>
                   <span className="text-[11px] text-ink-muted">Identifier</span>
                   <p className="text-xs font-semibold text-ink">{createdCredential.identifier}</p>
@@ -926,13 +926,13 @@ export default function AdminDashboardPage() {
                 <div>
                   <span className="text-[11px] text-ink-muted">Temporary Password</span>
                   <div className="flex items-center justify-between gap-2 mt-0.5">
-                    <code className="text-sm font-bold text-[#0D2185] dark:text-[#4C66F5] bg-white dark:bg-[#0F1538] px-2.5 py-1 rounded-md border border-subtle select-all">
+                    <code className="text-sm font-bold text-blue-600 dark:text-blue-400 bg-surface px-2.5 py-1 rounded-md border border-subtle select-all">
                       {createdCredential.tempPass}
                     </code>
                     <button
                       type="button"
                       onClick={() => handleCopy(createdCredential.tempPass)}
-                      className="p-1.5 rounded-lg text-slate-500 hover:text-ink hover:bg-slate-200 dark:hover:bg-[#232C63] transition-colors"
+                      className="p-1.5 rounded-lg text-slate-500 hover:text-ink hover:bg-surface-muted transition-colors"
                       title="Copy password"
                     >
                       {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
@@ -944,7 +944,7 @@ export default function AdminDashboardPage() {
               <button
                 type="button"
                 onClick={() => setCreatedCredential(null)}
-                className="w-full py-2.5 rounded-full text-xs font-semibold bg-[#0D2185] hover:bg-[#0A1A6B] dark:bg-[#4C66F5] text-white transition-colors"
+                className="w-full py-2.5 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 text-white transition-colors"
               >
                 Dismiss
               </button>

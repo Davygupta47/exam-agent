@@ -51,16 +51,16 @@ export default function StudentDashboardPage() {
     loadData();
   }, [loadData]);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-page flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-3 border-[#0D2185] dark:border-[#4C66F5] border-t-transparent rounded-full animate-spin" />
-          <p className="text-xs text-ink-muted">Loading your student portal...</p>
+    if (loading) {
+      return (
+        <div className="min-h-screen bg-page flex items-center justify-center">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-8 h-8 border-3 border-blue-600 dark:border-blue-500 border-t-transparent rounded-full animate-spin" />
+            <p className="text-xs text-ink-muted">Loading your student portal...</p>
+          </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
 
   return (
     <AppShell
