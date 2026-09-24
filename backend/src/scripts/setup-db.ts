@@ -1,17 +1,49 @@
-import fs from 'fs';
-import path from 'path';
-import pg from 'pg';
-import { parse } from 'csv-parse/sync';
-import bcrypt from 'bcryptjs';
-import { env } from '../config/env.js';
-import { ELECTIVE_CONFIG } from '../config/electiveConfig.js';
+import fs from "fs";
+import path from "path";
+import pg from "pg";
+import { parse } from "csv-parse/sync";
+import bcrypt from "bcryptjs";
+import { env } from "../config/env.js";
+import { ELECTIVE_CONFIG } from "../config/electiveConfig.js";
+//import { number } from "zod/v4";
+//import { string } from 'zod/v4';
 
 const { Client } = pg;
 
+type Subject = {
+  subject_code: string;
+  subject_name: string;
+  department: string;
+  year: string;
+  semester: string;
+  course_type: string;
+  elective_type: string;
+  credits: string;
+};
+
+type Teacher = {
+  teacher_id: string;
+  name: string;
+  initials: string;
+  department: string;
+  designation: string;
+  mail_id: string;
+};
+
+type Student = {
+  Autonomy_Roll_No: string;
+  College_Roll_No: string;
+  Registration_No: string;
+  Name: string;
+  Mail_Id: string;
+  Department: string;
+  Second_Year_GPA: string;
+};
+
 async function run() {
-  console.log('====================================================');
-  console.log('  College Exam Portal — Database Initialization     ');
-  console.log('====================================================');
+  console.log("====================================================");
+  console.log("  College Exam Portal — Database Initialization     ");
+  console.log("====================================================");
 
   const dbConfig = {
     host: env.PGHOST,
@@ -21,8 +53,10 @@ async function run() {
   };
 
   // Step 1: Ensure target database exists
-  console.log(`[1/6] Connecting to PostgreSQL at ${dbConfig.host}:${dbConfig.port}...`);
-  const rootClient = new Client({ ...dbConfig, database: 'postgres' });
+  console.log(
+    `[1/6] Connecting to PostgreSQL at ${dbConfig.host}:${dbConfig.port}...`
+  );
+  const rootClient = new Client({ ...dbConfig, database: "postgres" });
 
   try {
     await rootClient.connect();
@@ -32,25 +66,42 @@ async function run() {
     );
 
     if (checkDb.rows.length === 0) {
-      console.log(`[1/6] Database "${env.PGDATABASE}" does not exist. Creating it...`);
-      
+      console.log(
+        `[1/6] Database "${env.PGDATABASE}" does not exist. Creating it...`
+      );
+
       // Try to refresh template1 collation if Windows collation updated
       try {
-        await rootClient.query(`ALTER DATABASE template1 REFRESH COLLATION VERSION;`);
-      } catch {}
+        await rootClient.query(
+          `ALTER DATABASE template1 REFRESH COLLATION VERSION;`
+        );
+      } catch { }
 
       try {
         await rootClient.query(`CREATE DATABASE "${env.PGDATABASE}"`);
         console.log(`[1/6] Database "${env.PGDATABASE}" created successfully.`);
       } catch (createErr: any) {
-        if (createErr.message?.includes('collation') || createErr.message?.includes('template')) {
-          console.log(`[1/6] Template1 collation mismatch detected. Attempting creation with template0...`);
+        if (
+          createErr.message?.includes("collation") ||
+          createErr.message?.includes("template")
+        ) {
+          console.log(
+            `[1/6] Template1 collation mismatch detected. Attempting creation with template0...`
+          );
           try {
-            await rootClient.query(`CREATE DATABASE "${env.PGDATABASE}" TEMPLATE template0`);
-            console.log(`[1/6] Database "${env.PGDATABASE}" created successfully with template0.`);
+            await rootClient.query(
+              `CREATE DATABASE "${env.PGDATABASE}" TEMPLATE template0`
+            );
+            console.log(
+              `[1/6] Database "${env.PGDATABASE}" created successfully with template0.`
+            );
           } catch (t0Err) {
-            await rootClient.query(`CREATE DATABASE "${env.PGDATABASE}" LC_COLLATE 'C' LC_CTYPE 'C'`);
-            console.log(`[1/6] Database "${env.PGDATABASE}" created successfully with C collation.`);
+            await rootClient.query(
+              `CREATE DATABASE "${env.PGDATABASE}" LC_COLLATE 'C' LC_CTYPE 'C'`
+            );
+            console.log(
+              `[1/6] Database "${env.PGDATABASE}" created successfully with C collation.`
+            );
           }
         } else {
           throw createErr;
@@ -63,7 +114,7 @@ async function run() {
     console.error(`[1/6] Database creation error: ${err.message}`);
     throw err;
   } finally {
-    await rootClient.end().catch(() => {});
+    await rootClient.end().catch(() => { });
   }
 
   // Step 2: Connect to target database
@@ -77,53 +128,65 @@ async function run() {
   console.log(`[2/6] Connected to database "${env.PGDATABASE}".`);
 
   // Step 3: Run migration files in order
-  console.log('[3/6] Running schema migrations...');
-  const migrationsDir = path.resolve(process.cwd(), '../db/migrations');
+  console.log("[3/6] Running schema migrations...");
+  const migrationsDir = path.resolve(process.cwd(), "../db/migrations");
   const migrationFiles = [
-    'extensions.sql',
-    'enums.sql',
-    'users_tenant.sql',
-    'academic.sql',
-    'students_teachers.sql',
-    'elective_system.sql',
-    'exam_cycles.sql',
-    'scheduling.sql',
-    'marks_results.sql',
-    'notifications.sql',
-    'profile_extras.sql',
-    'elective_window.sql',
+    "extensions.sql",
+    "enums.sql",
+    "users_tenant.sql",
+    "academic.sql",
+    "students_teachers.sql",
+    "teacher_allocations.sql",
+    "elective_system.sql",
+    "exam_cycles.sql",
+    "scheduling.sql",
+    "marks_results.sql",
+    "notifications.sql",
+    "profile_extras.sql",
+    "elective_window.sql",
   ];
 
-    for (const file of migrationFiles) {
-      const filePath = path.join(migrationsDir, file);
-      if (fs.existsSync(filePath)) {
-        console.log(`  Applying: ${file}`);
-        const sql = fs.readFileSync(filePath, 'utf8');
-        try {
-          await client.query(sql);
-        } catch (mErr: any) {
-          // Ignore type/relation already exists
-          if (mErr.code === '42710' || mErr.code === '42P07' || mErr.message?.includes('already exists')) {
-            console.log(`  (Note: Objects in ${file} already exist, skipping creation)`);
-          } else {
-            console.warn(`  Warning applying ${file}: ${mErr.message}`);
-          }
+  for (const file of migrationFiles) {
+    const filePath = path.join(migrationsDir, file);
+    if (fs.existsSync(filePath)) {
+      console.log(`  Applying: ${file}`);
+      const sql = fs.readFileSync(filePath, "utf8");
+      try {
+        await client.query(sql);
+      } catch (mErr: any) {
+        // Ignore type/relation already exists
+        if (
+          mErr.code === "42710" ||
+          mErr.code === "42P07" ||
+          mErr.message?.includes("already exists")
+        ) {
+          console.log(
+            `  (Note: Objects in ${file} already exist, skipping creation)`
+          );
+        } else {
+          console.warn(`  Warning applying ${file}: ${mErr.message}`);
         }
-      } else {
-        console.warn(`  Warning: Migration file not found: ${file}`);
       }
+    } else {
+      console.warn(`  Warning: Migration file not found: ${file}`);
     }
+  }
 
   // Step 4: Seed Tenants, Departments, Programs, Batches
-  console.log('[4/6] Seeding foundational academic structure...');
+  console.log("[4/6] Seeding foundational academic structure...");
   await client.query(`
     INSERT INTO tenants (id, name, slug) VALUES (1, 'Heritage Institute of Technology', 'heritage-it')
     ON CONFLICT (id) DO NOTHING;
 
+    -- Core degree-granting departments (id 1-2 are HOD-managed)
     INSERT INTO departments (id, tenant_id, name, code) VALUES
       (1, 1, 'Artificial Intelligence & Machine Learning', 'AIML'),
-      (2, 1, 'Data Science', 'Data Science')
-    ON CONFLICT (id) DO NOTHING;
+      (2, 1, 'Data Science',                               'DSC'),
+      (3, 1, 'Computer Science & Engineering',             'CSE'),
+      (4, 1, 'Chemistry',                                  'CHE'),
+      (5, 1, 'Electronics & Communication Engineering',    'ECE'),
+      (6, 1, 'Mathematics',                                'MTH')
+    ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, code = EXCLUDED.code;
 
     INSERT INTO programs (id, tenant_id, department_id, name, code) VALUES
       (1, 1, 1, 'B.Tech CSE (AIML)', 'BTECH-AIML'),
@@ -141,53 +204,73 @@ async function run() {
     SELECT setval('batches_id_seq', (SELECT COALESCE(MAX(id), 1) FROM batches));
   `);
 
+  // Build a dept-code -> dept-id lookup from the DB (used by all three CSV imports below)
+  const deptRows = await client.query(`SELECT id, code FROM departments WHERE tenant_id = 1`);
+  const deptCodeToId = new Map<string, number>(
+    deptRows.rows.map((r: { id: number; code: string }) => [r.code.toUpperCase(), r.id])
+  );
+  // Helper: resolve dept id from a raw CSV department string.
+  // Falls back to AIML (id=1) for unknown codes (e.g. ADMIN).
+  const resolveDeptId = (rawDept: string): number => {
+    const key = (rawDept || '').trim().toUpperCase();
+    // Legacy full-name aliases
+    if (key === 'DATA SCIENCE') return deptCodeToId.get('DSC') ?? 2;
+    if (key === 'COMPUTER SCIENCE' || key === 'COMPUTER SCIENCE & ENGINEERING') return deptCodeToId.get('CSE') ?? 3;
+    if (key === 'CHEMISTRY') return deptCodeToId.get('CHE') ?? 4;
+    if (key === 'ELECTRONICS & COMMUNICATION ENGINEERING') return deptCodeToId.get('ECE') ?? 5;
+    if (key === 'MATHEMATICS') return deptCodeToId.get('MTH') ?? 6;
+    return deptCodeToId.get(key) ?? 1; // default: AIML
+  };
+
   // Step 5: Ingest CSV files
-  console.log('[5/6] Ingesting CSV files and generating user accounts...');
+  console.log("[5/6] Ingesting CSV files and generating user accounts...");
 
   // 5a. Subjects CSV
-  const subjectsPath = path.resolve(process.cwd(), '../db/subjects.csv');
+  const subjectsPath = path.resolve(process.cwd(), "../db/subjects.csv");
   if (fs.existsSync(subjectsPath)) {
-    const subjectsRaw = fs.readFileSync(subjectsPath, 'utf8');
-    const subjects = parse(subjectsRaw, { columns: true, skip_empty_lines: true });
+    const subjectsRaw = fs.readFileSync(subjectsPath, "utf8");
+    const subjects = parse<Subject>(subjectsRaw, {
+      columns: true,
+      skip_empty_lines: true,
+    });
 
-    console.log(`  Importing ${subjects.length} subjects...`);
+    console.log(`  Importing ${subjects} subjects...`);
     for (const sub of subjects) {
       if (!sub.subject_code || !sub.subject_code.trim()) continue;
 
       const courseType =
-        sub.course_type === 'Practical'
-          ? 'PRACTICAL'
-          : sub.course_type === 'Sessional'
-          ? 'SESSIONAL'
-          : 'THEORY';
+        sub.course_type === "Practical"
+          ? "PRACTICAL"
+          : sub.course_type === "Sessional"
+            ? "SESSIONAL"
+            : "THEORY";
 
-      let electiveType = 'COMPULSORY';
+      let electiveType = "COMPULSORY";
       switch (sub.elective_type) {
-        case 'Professional Elective-I':
-          electiveType = 'PROFESSIONAL_ELECTIVE_I';
+        case "Professional Elective-I":
+          electiveType = "PROFESSIONAL_ELECTIVE_I";
           break;
-        case 'Professional Elective-II':
-          electiveType = 'PROFESSIONAL_ELECTIVE_II';
+        case "Professional Elective-II":
+          electiveType = "PROFESSIONAL_ELECTIVE_II";
           break;
-        case 'Professional Elective-III':
-          electiveType = 'PROFESSIONAL_ELECTIVE_III';
+        case "Professional Elective-III":
+          electiveType = "PROFESSIONAL_ELECTIVE_III";
           break;
-        case 'Professional Elective-II (Lab)':
-          electiveType = 'PROFESSIONAL_ELECTIVE_II_LAB';
+        case "Professional Elective-II (Lab)":
+          electiveType = "PROFESSIONAL_ELECTIVE_II_LAB";
           break;
-        case 'Professional Elective-III (Lab)':
-          electiveType = 'PROFESSIONAL_ELECTIVE_III_LAB';
+        case "Professional Elective-III (Lab)":
+          electiveType = "PROFESSIONAL_ELECTIVE_III_LAB";
           break;
-        case 'Open Elective-I':
-          electiveType = 'OPEN_ELECTIVE_I';
+        case "Open Elective-I":
+          electiveType = "OPEN_ELECTIVE_I";
           break;
-        case 'Open Elective-II':
-          electiveType = 'OPEN_ELECTIVE_II';
+        case "Open Elective-II":
+          electiveType = "OPEN_ELECTIVE_II";
           break;
       }
 
-      // Department ID
-      const deptId = sub.department && sub.department.trim().toUpperCase() === 'DATA SCIENCE' ? 2 : 1;
+      const deptId = resolveDeptId(sub.department);
 
       await client.query(
         `INSERT INTO subjects (tenant_id, name, code, department_id, year, semester, course_type, elective_type, credits)
@@ -198,33 +281,43 @@ async function run() {
           sub.subject_name,
           sub.subject_code.trim(),
           deptId,
-          parseInt(sub.year || '3', 10),
-          parseInt(sub.semester || '5', 10),
+          parseInt(sub.year || "3", 10),
+          parseInt(sub.semester || "5", 10),
           courseType,
           electiveType,
-          parseFloat(sub.credits || '3.0'),
+          parseFloat(sub.credits || "3.0"),
         ]
       );
     }
   }
 
   // Pre-compute password hashes for speed
-  const studentPasswordHash = await bcrypt.hash('Student@123', 10);
-  const teacherPasswordHash = await bcrypt.hash('Teacher@123', 10);
-  const adminPasswordHash = await bcrypt.hash('Admin@123', 10);
+  const studentPasswordHash = await bcrypt.hash("Student@123", 10);
+  const teacherPasswordHash = await bcrypt.hash("Teacher@123", 10);
+  const adminPasswordHash = await bcrypt.hash("Admin@123", 10);
 
   // 5b. Teachers CSV
-  const teachersPath = path.resolve(process.cwd(), '../db/teachers.csv');
+  const teachersPath = path.resolve(process.cwd(), "../db/teachers.csv");
   if (fs.existsSync(teachersPath)) {
-    const teachersRaw = fs.readFileSync(teachersPath, 'utf8');
-    const teachers = parse(teachersRaw, { columns: true, skip_empty_lines: true });
+    const teachersRaw = fs.readFileSync(teachersPath, "utf8");
+    const teachers = parse<Teacher>(teachersRaw, {
+      columns: true,
+      skip_empty_lines: true,
+    });
 
     console.log(`  Importing ${teachers.length} teachers & admins...`);
     for (const t of teachers) {
-      const isTeacherAdmin = t.teacher_id === 'ADMIN01' || t.department === 'ADMIN';
-      const role = isTeacherAdmin ? 'super_admin' : t.designation === 'HOD' ? 'hod' : 'teacher';
-      const passwordHash = isTeacherAdmin ? adminPasswordHash : teacherPasswordHash;
-      const deptId = t.department && t.department.trim().toUpperCase() === 'DATA SCIENCE' ? 2 : 1;
+      const isTeacherAdmin =
+        t.teacher_id === "ADMIN01" || t.department === "ADMIN";
+      const role = isTeacherAdmin
+        ? "super_admin"
+        : t.designation === "HOD"
+          ? "hod"
+          : "teacher";
+      const passwordHash = isTeacherAdmin
+        ? adminPasswordHash
+        : teacherPasswordHash;
+      const deptId = resolveDeptId(t.department);
 
       // Upsert into users
       const userRes = await client.query(
@@ -242,7 +335,8 @@ async function run() {
         `INSERT INTO teachers (tenant_id, user_id, teacher_code, name, initials, email, department_id, designation)
          VALUES (1, $1, $2, $3, $4, $5, $6, $7)
          ON CONFLICT (tenant_id, teacher_code)
-         DO UPDATE SET user_id = EXCLUDED.user_id, designation = EXCLUDED.designation, email = EXCLUDED.email`,
+         DO UPDATE SET user_id = EXCLUDED.user_id, designation = EXCLUDED.designation,
+                       email = EXCLUDED.email, department_id = EXCLUDED.department_id`,
         [
           userId,
           t.teacher_id.trim(),
@@ -265,27 +359,31 @@ async function run() {
   );
 
   // 5c. Students CSV
-  const studentsPath = path.resolve(process.cwd(), '../db/students.csv');
+  const studentsPath = path.resolve(process.cwd(), "../db/students.csv");
   if (fs.existsSync(studentsPath)) {
-    const studentsRaw = fs.readFileSync(studentsPath, 'utf8');
-    const students = parse(studentsRaw, { columns: true, skip_empty_lines: true });
+    const studentsRaw = fs.readFileSync(studentsPath, "utf8");
+    const students = parse<Student>(studentsRaw, {
+      columns: true,
+      skip_empty_lines: true,
+    });
 
     console.log(`  Importing ${students.length} students...`);
     for (const s of students) {
-      const autonomyRoll = s.Autonomy_Roll_No || s.autonomy_roll_no;
-      const collegeRoll = s.College_Roll_No || s.college_roll_no;
-      const regNo = s.Registration_No || s.registration_no;
-      const name = s.Name || s.name;
-      const dept = s.Department || s.department;
-      const gpa = s.Second_Year_GPA || s.second_year_gpa;
-
-      const mailId = s.Mail_Id || s.mail_id;
+      const autonomyRoll = s.Autonomy_Roll_No;
+      const collegeRoll = s.College_Roll_No;
+      const regNo = s.Registration_No;
+      const name = s.Name;
+      const dept = s.Department;
+      const gpa = s.Second_Year_GPA;
+      const mailId = s.Mail_Id;
 
       if (!collegeRoll || !name) continue;
 
       // Use email from CSV (Mail_Id column) for login
-      const email = mailId ? mailId.toLowerCase().trim() : `${collegeRoll}@heritageit.edu`.toLowerCase();
-      const deptId = dept && dept.trim().toUpperCase() === 'DATA SCIENCE' ? 2 : 1;
+      const email = mailId
+        ? mailId.toLowerCase().trim()
+        : `${collegeRoll}@heritageit.edu`.toLowerCase();
+      const deptId = resolveDeptId(dept);
       const progId = deptId === 2 ? 2 : 1;
 
       // Upsert user
@@ -321,7 +419,9 @@ async function run() {
   }
 
   // Step 6: Enroll students in compulsory subjects & setup capacities
-  console.log('[6/6] Enrolling students in semester compulsory subjects and configuring electives...');
+  console.log(
+    "[6/6] Enrolling students in semester compulsory subjects and configuring electives..."
+  );
   await client.query(`
     INSERT INTO student_subjects (tenant_id, student_id, subject_id, is_elective)
     SELECT DISTINCT 1, s.id, sub.id, FALSE
@@ -369,23 +469,23 @@ async function run() {
 
   await client.end();
 
-  console.log('\n====================================================');
-  console.log('  Database Setup Completed Successfully!           ');
-  console.log('====================================================');
+  console.log("\n====================================================");
+  console.log("  Database Setup Completed Successfully!           ");
+  console.log("====================================================");
   console.log(`  Users Provisioned:    ${summary.rows[0].users_count}`);
   console.log(`  Students:             ${summary.rows[0].students_count}`);
   console.log(`  Teachers:             ${summary.rows[0].teachers_count}`);
   console.log(`  Subjects:             ${summary.rows[0].subjects_count}`);
   console.log(`  Subject Enrollments:  ${summary.rows[0].enrollments_count}`);
-  console.log('----------------------------------------------------');
-  console.log('  Ready for Login:');
-  console.log('  - Student: 2310018001 / Student@123');
-  console.log('  - Faculty: AIML01 / Teacher@123');
-  console.log('  - Admin:   admin@heritageit.edu / Admin@123');
-  console.log('====================================================\n');
+  console.log("----------------------------------------------------");
+  console.log("  Ready for Login:");
+  console.log("  - Student: 2310018001 / Student@123");
+  console.log("  - Faculty: AIML01 / Teacher@123");
+  console.log("  - Admin:   admin@heritageit.edu / Admin@123");
+  console.log("====================================================\n");
 }
 
 run().catch((err) => {
-  console.error('[Setup Error]', err);
+  console.error("[Setup Error]", err);
   process.exit(1);
 });

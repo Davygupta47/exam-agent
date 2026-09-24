@@ -4,14 +4,19 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { AppShell } from "@/components/layout/app-shell";
 import { fetchApi } from "@/lib/api";
-import { User, TeacherProfile } from "@/types";
+import { User } from "@/types";
 import { Save, AlertCircle, Users, BookOpen } from "lucide-react";
-import { useComingSoon } from "@/components/ui/coming-soon-modal";
 
 interface Teacher {
   id: number;
   name: string;
   initials?: string;
+  teacher_code: string;
+  teacher_prefix: string;  // e.g. 'AIML', 'CHE', 'DS' — stripped from teacher_code
+  designation: string;
+  department_id: number;
+  department_code: string;
+  teacher_type: "INSTRUCTOR" | "TECHNICAL_ASSISTANT";
 }
 
 interface Subject {
@@ -21,6 +26,15 @@ interface Subject {
   credits: number;
   course_type: string;
   elective_type: string;
+  department_id: number;
+  department_code: string;
+  speciality_code: string;
+}
+
+interface Assignment {
+  subject_id: number;
+  teacher_id: number;
+  assignment_role: "INSTRUCTOR" | "TECHNICAL_ASSISTANT";
 }
 
 export default function TeacherAllocationPage() {
@@ -31,7 +45,7 @@ export default function TeacherAllocationPage() {
   const [stats, setStats] = React.useState({ student_count: 0 });
   const [teachers, setTeachers] = React.useState<Teacher[]>([]);
   const [subjects, setSubjects] = React.useState<Subject[]>([]);
-  const [assignments, setAssignments] = React.useState<Record<number, number>>({});
+  const [assignments, setAssignments] = React.useState<Record<number, number[]>>({});
   const [error, setError] = React.useState<string | null>(null);
   const [successMsg, setSuccessMsg] = React.useState<string | null>(null);
 
@@ -43,9 +57,10 @@ export default function TeacherAllocationPage() {
         return;
       }
       
-      // Prevent non-HOD from accessing
-      // Note: role could be 'hod' or 'teacher' depending on how the backend mapped it.
-      // But we can check if the API calls succeed. We'll rely on the backend `requireRole(['hod'])`
+      if (meRes.user.role !== "hod") {
+        router.push("/faculty");
+        return;
+      }
       setUser(meRes.user);
 
       const [teachersRes, statsRes, subjectsRes, assignmentsRes] = await Promise.all([
@@ -65,9 +80,15 @@ export default function TeacherAllocationPage() {
       setStats(statsRes.data || { student_count: 0 });
       setSubjects(subjectsRes.data || []);
 
-      const currentAssignments: Record<number, number> = {};
-      (assignmentsRes.data || []).forEach((a: any) => {
-        currentAssignments[a.subject_id] = a.teacher_id;
+      const currentAssignments: Record<number, number[]> = {};
+      (assignmentsRes.data || []).forEach((a: Assignment) => {
+        const current = currentAssignments[a.subject_id] || [];
+        if (a.assignment_role === "TECHNICAL_ASSISTANT") {
+          current.push(a.teacher_id);
+        } else {
+          current.unshift(a.teacher_id);
+        }
+        currentAssignments[a.subject_id] = current;
       });
       setAssignments(currentAssignments);
     } catch (err) {
@@ -82,13 +103,48 @@ export default function TeacherAllocationPage() {
     loadData();
   }, [loadData]);
 
-  const handleAssignmentChange = (subjectId: number, teacherId: string) => {
+  const handleAssignmentChange = (subjectId: number, index: number, teacherId: string) => {
     setAssignments(prev => ({
       ...prev,
-      [subjectId]: parseInt(teacherId, 10),
+      [subjectId]: (prev[subjectId] || []).map((value, currentIndex) =>
+        currentIndex === index ? parseInt(teacherId, 10) : value
+      ).concat((prev[subjectId] || []).length <= index ? [parseInt(teacherId, 10)] : []),
     }));
     setError(null);
     setSuccessMsg(null);
+  };
+
+  const getEligibleTeachers = (subject: Subject, role: "INSTRUCTOR" | "TECHNICAL_ASSISTANT") => {
+    const isCompulsory = subject.elective_type?.toUpperCase() === "COMPULSORY";
+    const isPractical = subject.course_type?.toUpperCase() === "PRACTICAL";
+
+    // For electives and practicals, match against the first 3 characters of the subject code
+    const subjectPrefix = subject.code.substring(0, 3).toUpperCase();
+    const matchesSpeciality = (teacher: Teacher) =>
+      teacher.teacher_prefix?.toUpperCase() === subjectPrefix;
+
+    return teachers.filter((teacher) => {
+      // Exclude Admin from allocation
+      if (teacher.teacher_prefix?.toUpperCase() === "ADMIN" || teacher.department_code?.toUpperCase() === "ADMIN") {
+        return false;
+      }
+
+      if (role === "TECHNICAL_ASSISTANT" && teacher.teacher_type !== "TECHNICAL_ASSISTANT") return false;
+      if (role === "INSTRUCTOR" && teacher.teacher_type !== "INSTRUCTOR") return false;
+
+      // Practical subjects always use 3-char prefix matching
+      if (isPractical) {
+        return matchesSpeciality(teacher);
+      }
+
+      // Theory Compulsory: strictly within the department
+      if (isCompulsory) {
+        return teacher.department_id === subject.department_id;
+      }
+      
+      // Theory Electives: match 3 characters of subject code
+      return matchesSpeciality(teacher);
+    });
   };
 
   const handleSave = async () => {
@@ -97,12 +153,15 @@ export default function TeacherAllocationPage() {
     setSuccessMsg(null);
 
     const payload = {
-      assignments: Object.entries(assignments)
-        .filter(([_, teacherId]) => teacherId && !isNaN(teacherId))
-        .map(([subjectId, teacherId]) => ({
-          subject_id: parseInt(subjectId, 10),
-          teacher_id: teacherId,
-        })),
+      assignments: Object.entries(assignments).flatMap(([subjectId, teacherIds]) =>
+        teacherIds
+          .filter((teacherId) => teacherId && !isNaN(teacherId))
+          .map((teacherId, index) => ({
+            subject_id: parseInt(subjectId, 10),
+            teacher_id: teacherId,
+            assignment_role: index === 0 ? "INSTRUCTOR" : "TECHNICAL_ASSISTANT",
+          }))
+      ),
     };
 
     try {
@@ -116,7 +175,7 @@ export default function TeacherAllocationPage() {
       } else {
         setError(res.error || "Failed to save assignments.");
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred.");
     } finally {
       setSaving(false);
@@ -214,19 +273,36 @@ export default function TeacherAllocationPage() {
                         {subject.elective_type !== 'NONE' && ` • ${subject.elective_type}`}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <select
-                        className="w-full min-w-[200px] px-3 py-2 rounded-xl bg-surface border border-subtle text-sm text-ink focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500 transition-all"
-                        value={assignments[subject.id] || ""}
-                        onChange={(e) => handleAssignmentChange(subject.id, e.target.value)}
-                      >
-                        <option value="">-- Unassigned --</option>
-                        {teachers.map((t) => (
-                          <option key={t.id} value={t.id}>
-                            {t.name} {t.initials ? `(${t.initials})` : ''}
-                          </option>
+                    <td className="px-6 py-4">
+                      <div className="space-y-2 min-w-[250px]">
+                        <select
+                          className="w-full px-3 py-2 rounded-xl bg-surface border border-subtle text-sm text-ink focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500 transition-all"
+                          value={assignments[subject.id]?.[0] || ""}
+                          onChange={(e) => handleAssignmentChange(subject.id, 0, e.target.value)}
+                        >
+                          <option value="">-- Instructor --</option>
+                          {getEligibleTeachers(subject, "INSTRUCTOR").map((teacher) => (
+                            <option key={teacher.id} value={teacher.id}>
+                              {teacher.teacher_code} • {teacher.name}
+                            </option>
+                          ))}
+                        </select>
+                        {subject.course_type === "PRACTICAL" && [1, 2].map((index) => (
+                          <select
+                            key={index}
+                            className="w-full px-3 py-2 rounded-xl bg-surface border border-subtle text-sm text-ink focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500 transition-all"
+                            value={assignments[subject.id]?.[index] || ""}
+                            onChange={(e) => handleAssignmentChange(subject.id, index, e.target.value)}
+                          >
+                            <option value="">-- Technical Assistant {index} (optional) --</option>
+                            {getEligibleTeachers(subject, "TECHNICAL_ASSISTANT").map((teacher) => (
+                              <option key={teacher.id} value={teacher.id}>
+                                {teacher.teacher_code} • {teacher.name}
+                              </option>
+                            ))}
+                          </select>
                         ))}
-                      </select>
+                      </div>
                     </td>
                   </tr>
                 ))}
