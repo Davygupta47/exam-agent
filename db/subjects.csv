@@ -46,44 +46,44 @@ CSE3267,"Real Time & Embedded System Lab",AIML,3,6,Practical,Professional Electi
 IOT3261,"Big Data and IOT Lab",AIML,3,6,Practical,Professional Elective-III (Lab),1.0
 AML3293,"Term Paper and Seminar",AIML,3,6,Sessional,Compulsory,2.0
 AML3295,"Project-I",AIML,3,6,Sessional,Compulsory,2.0
-DSC3102,"Introduction to Database Management Systems",DATA SCIENCE,3,5,Theory,Compulsory,4.0
-DSC3103,"Principles and Practice of Software Development",DATA SCIENCE,3,5,Theory,Compulsory,3.0
-DSC3101,"Introduction to Data Mining",DATA SCIENCE,3,5,Theory,Compulsory,3.0
-DSC3132,"Business Analytics",DATA SCIENCE,3,5,Theory,Professional Elective-I,3.0
-DSC3133,"Web Mining",DATA SCIENCE,3,5,Theory,Professional Elective-I,3.0
-CSE3131,"Computer Graphics & Multimedia",DATA SCIENCE,3,5,Theory,Professional Elective-I,3.0
-CSE3133,"Web Technologies",DATA SCIENCE,3,5,Theory,Professional Elective-I,3.0
-DSC3141,"Data Curation",DATA SCIENCE,3,5,Theory,Professional Elective-II,3.0
-DSC3142,"Fundamentals of Computer Networks",DATA SCIENCE,3,5,Theory,Professional Elective-II,3.0
-DSC3143,"Introduction to Soft Computing",DATA SCIENCE,3,5,Theory,Professional Elective-II,3.0
-CSE3141,"Artificial Intelligence",DATA SCIENCE,3,5,Theory,Professional Elective-II,3.0
-AEI3122,"Fundamentals of Sensors and Transducers",DATA SCIENCE,3,5,Theory,Open Elective-I,3.0
-CHE3121,"Water and Liquid Waste Management",DATA SCIENCE,3,5,Theory,Open Elective-I,3.0
-CHE3122,"Plastic Waste Recycle and Management",DATA SCIENCE,3,5,Theory,Open Elective-I,3.0
-ECE3123,"Error Control Coding for Secure Data Transmission",DATA SCIENCE,3,5,Theory,Open Elective-I,3.0
-ECE3124,"Introduction to VLSI Design",DATA SCIENCE,3,5,Theory,Open Elective-I,3.0
-MEC3121,"Additive Manufacturing",DATA SCIENCE,3,5,Theory,Open Elective-I,3.0
-MEC3122,"Total Quality Management (TQM)",DATA SCIENCE,3,5,Theory,Open Elective-I,3.0
-MTH3121,"Linear Algebra",DATA SCIENCE,3,5,Theory,Open Elective-I,3.0
-AEI3123,"Optical Instrumentation",DATA SCIENCE,3,5,Theory,Open Elective-I,3.0
-CIV3121,"Principles of Sustainable Engineering",DATA SCIENCE,3,5,Theory,Open Elective-I,3.0
-INF3121,"Principles of Cryptography",DATA SCIENCE,3,5,Theory,Open Elective-I,3.0
-DSC3152,"Introduction to Database Management Systems Lab",DATA SCIENCE,3,5,Practical,Compulsory,1.5
-DSC3153,"Software Development Lab",DATA SCIENCE,3,5,Practical,Compulsory,1.0
-DSC3151,"Introduction to Data Mining Lab",DATA SCIENCE,3,5,Practical,Compulsory,1.0
-DSC3171,"Data Curation Lab",DATA SCIENCE,3,5,Practical,Professional Elective-II (Lab),1.0
-DSC3172,"Fundamentals of Computer Networks Lab",DATA SCIENCE,3,5,Practical,Professional Elective-II (Lab),1.0
-DSC3173,"Introduction to Soft Computing Lab",DATA SCIENCE,3,5,Practical,Professional Elective-II (Lab),1.0
-CSE3171,"Artificial Intelligence Lab",DATA SCIENCE,3,5,Practical,Professional Elective-II (Lab),1.0
-AEI3222,"Instrumentation and Telemetry",DATA SCIENCE,3,6,Theory,Open Elective-II,3.0
-MTH3221,"Computational Mathematics",DATA SCIENCE,3,6,Theory,Open Elective-II,3.0
-ECE3221,"AI in Radio Communication",DATA SCIENCE,3,6,Theory,Open Elective-II,3.0
-BTC3225,"Computational Biology",DATA SCIENCE,3,6,Theory,Open Elective-II,3.0
-CIV3222,"Project Planning and Management",DATA SCIENCE,3,6,Theory,Open Elective-II,3.0
-INC3016,"Indian Constitution and Civil Society (Mandatory)",DATA SCIENCE,3,6,Theory,Compulsory,0.0
-DSC3251,"OOP Concepts Lab",DATA SCIENCE,3,6,Practical,Compulsory,1.5
-DSC3252,"Machine Learning Lab",DATA SCIENCE,3,6,Practical,Compulsory,1.5
-DSC3261,"Data Warehousing Lab",DATA SCIENCE,3,6,Practical,Professional Elective-III (Lab),1.0
-CSE3265,"Cloud Computing with AWS Lab",DATA SCIENCE,3,6,Practical,Professional Elective-III (Lab),1.0
-DSC3293,"Term Paper and Seminar",DATA SCIENCE,3,6,Sessional,Compulsory,2.0
-DSC3295,"Project-I",DATA SCIENCE,3,6,Sessional,Compulsory,2.0
+DSC3102,"Introduction to Database Management Systems",DSC,3,5,Theory,Compulsory,4.0
+DSC3103,"Principles and Practice of Software Development",DSC,3,5,Theory,Compulsory,3.0
+DSC3101,"Introduction to Data Mining",DSC,3,5,Theory,Compulsory,3.0
+DSC3132,"Business Analytics",DSC,3,5,Theory,Professional Elective-I,3.0
+DSC3133,"Web Mining",DSC,3,5,Theory,Professional Elective-I,3.0
+CSE3131,"Computer Graphics & Multimedia",DSC,3,5,Theory,Professional Elective-I,3.0
+CSE3133,"Web Technologies",DSC,3,5,Theory,Professional Elective-I,3.0
+DSC3141,"Data Curation",DSC,3,5,Theory,Professional Elective-II,3.0
+DSC3142,"Fundamentals of Computer Networks",DSC,3,5,Theory,Professional Elective-II,3.0
+DSC3143,"Introduction to Soft Computing",DSC,3,5,Theory,Professional Elective-II,3.0
+CSE3141,"Artificial Intelligence",DSC,3,5,Theory,Professional Elective-II,3.0
+AEI3122,"Fundamentals of Sensors and Transducers",DSC,3,5,Theory,Open Elective-I,3.0
+CHE3121,"Water and Liquid Waste Management",DSC,3,5,Theory,Open Elective-I,3.0
+CHE3122,"Plastic Waste Recycle and Management",DSC,3,5,Theory,Open Elective-I,3.0
+ECE3123,"Error Control Coding for Secure Data Transmission",DSC,3,5,Theory,Open Elective-I,3.0
+ECE3124,"Introduction to VLSI Design",DSC,3,5,Theory,Open Elective-I,3.0
+MEC3121,"Additive Manufacturing",DSC,3,5,Theory,Open Elective-I,3.0
+MEC3122,"Total Quality Management (TQM)",DSC,3,5,Theory,Open Elective-I,3.0
+MTH3121,"Linear Algebra",DSC,3,5,Theory,Open Elective-I,3.0
+AEI3123,"Optical Instrumentation",DSC,3,5,Theory,Open Elective-I,3.0
+CIV3121,"Principles of Sustainable Engineering",DSC,3,5,Theory,Open Elective-I,3.0
+INF3121,"Principles of Cryptography",DSC,3,5,Theory,Open Elective-I,3.0
+DSC3152,"Introduction to Database Management Systems Lab",DSC,3,5,Practical,Compulsory,1.5
+DSC3153,"Software Development Lab",DSC,3,5,Practical,Compulsory,1.0
+DSC3151,"Introduction to Data Mining Lab",DSC,3,5,Practical,Compulsory,1.0
+DSC3171,"Data Curation Lab",DSC,3,5,Practical,Professional Elective-II (Lab),1.0
+DSC3172,"Fundamentals of Computer Networks Lab",DSC,3,5,Practical,Professional Elective-II (Lab),1.0
+DSC3173,"Introduction to Soft Computing Lab",DSC,3,5,Practical,Professional Elective-II (Lab),1.0
+CSE3171,"Artificial Intelligence Lab",DSC,3,5,Practical,Professional Elective-II (Lab),1.0
+AEI3222,"Instrumentation and Telemetry",DSC,3,6,Theory,Open Elective-II,3.0
+MTH3221,"Computational Mathematics",DSC,3,6,Theory,Open Elective-II,3.0
+ECE3221,"AI in Radio Communication",DSC,3,6,Theory,Open Elective-II,3.0
+BTC3225,"Computational Biology",DSC,3,6,Theory,Open Elective-II,3.0
+CIV3222,"Project Planning and Management",DSC,3,6,Theory,Open Elective-II,3.0
+INC3016,"Indian Constitution and Civil Society (Mandatory)",DSC,3,6,Theory,Compulsory,0.0
+DSC3251,"OOP Concepts Lab",DSC,3,6,Practical,Compulsory,1.5
+DSC3252,"Machine Learning Lab",DSC,3,6,Practical,Compulsory,1.5
+DSC3261,"Data Warehousing Lab",DSC,3,6,Practical,Professional Elective-III (Lab),1.0
+CSE3265,"Cloud Computing with AWS Lab",DSC,3,6,Practical,Professional Elective-III (Lab),1.0
+DSC3293,"Term Paper and Seminar",DSC,3,6,Sessional,Compulsory,2.0
+DSC3295,"Project-I",DSC,3,6,Sessional,Compulsory,2.0
