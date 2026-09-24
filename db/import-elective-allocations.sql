@@ -8,19 +8,19 @@ CREATE TEMP TABLE tmp_external_allocations (
   elective_type elective_type
 );
 
-\copy tmp_external_allocations (student_name, college_roll_no, autonomy_roll_no, subject_allocated) FROM '/Users/savvy/Downloads/pe1.txt' WITH (FORMAT csv, DELIMITER E'\t', HEADER true)
+\copy tmp_external_allocations (student_name, college_roll_no, autonomy_roll_no, subject_allocated) FROM 'db/pe1.txt' WITH (FORMAT csv, DELIMITER E'\t', HEADER true)
 
 UPDATE tmp_external_allocations
 SET elective_type = 'PROFESSIONAL_ELECTIVE_I'
 WHERE elective_type IS NULL;
 
-\copy tmp_external_allocations (student_name, college_roll_no, autonomy_roll_no, subject_allocated) FROM '/Users/savvy/Downloads/pe2.txt' WITH (FORMAT csv, DELIMITER E'\t', HEADER true)
+\copy tmp_external_allocations (student_name, college_roll_no, autonomy_roll_no, subject_allocated) FROM 'db/pe2.txt' WITH (FORMAT csv, DELIMITER E'\t', HEADER true)
 
 UPDATE tmp_external_allocations
 SET elective_type = 'PROFESSIONAL_ELECTIVE_II'
 WHERE elective_type IS NULL;
 
-\copy tmp_external_allocations (student_name, college_roll_no, autonomy_roll_no, subject_allocated) FROM '/Users/savvy/Downloads/oe1.txt' WITH (FORMAT csv, DELIMITER E'\t', HEADER true)
+\copy tmp_external_allocations (student_name, college_roll_no, autonomy_roll_no, subject_allocated) FROM 'db/oe1.txt' WITH (FORMAT csv, DELIMITER E'\t', HEADER true)
 
 UPDATE tmp_external_allocations
 SET elective_type = 'OPEN_ELECTIVE_I'
