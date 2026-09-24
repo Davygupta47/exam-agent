@@ -1,24 +1,24 @@
 teacher_id,name,initials,department,designation,mail_id
 ADMIN01,"Prof. (Dr.) Basab Chowdhury","BSC","ADMIN","Principal",basab.chowdhury@heritageit.edu
-AIML01,"Prof. (Dr.) Sujay Saha","SJS","AIML","HOD",sujay.saha@heritageit.edu
-AIML02,"Prof. (Dr.) Mohuya Byabartta Kar","MBK","AIML","Associate Professor",mohuya.byabartta@heritageit.edu
-AIML03,"Prof. (Dr.) Ritankar Mandal","RM","AIML","Assistant Professor",ritankar.mandal@heritageit.edu
-AIML04,"Prof. Pratik Kumar Haldar","PKH","AIML","Assistant Professor",pratik.kumarhaldar@heritageit.edu
-AIML05,"Mr. Arunava Sengupta","ASG","AIML","Technical Assistant",arunava.sengupta@heritageit.edu
-AIML06,"Ms. Shubhangini Dey","SDD","AIML","Technical Assistant",shubhangini.dey@heritageit.edu
-DS01,"Prof. (Dr.) Subhajit Datta","SD","Data Science","HOD",subhajit.datta@heritageit.edu
-DS02,"Prof. (Dr.) Nilina Bera","NB","Data Science","Assistant Professor",nilina.bera@heritageit.edu
-DS03,"Prof. Arpita Talukdar","AT","Data Science","Assistant Professor",arpita.talukdar@heritageit.edu
-DS04,"Prof. Deblina Chowdhury","DC","Data Science","Assistant Professor",deblina.chowdhury@heritageit.edu
-DS05,"Mr. Srijit Talukdar","ST","Data Science","Technical Assistant",srijit.talukdar@heritageit.edu
-DS06,"Ms. Tithi Dutta","TD","Data Science","Technical Assistant",tithi.dutta@heritageit.edu
-CSE01,"Prof. (Dr.) Aritra Saha","AS","Computer Science","Assistant Professor",aritra.saha@heritageit.edu
-CSE02,"Prof. (Dr.) Sabyasachi Banerjee","SB","Computer Science","Assistant Professor",sabyasachi.banerjee@heritageit.edu
-CSE04,"Prof. (Dr.) Shilpi Saha","SS","Computer Science","Assistant Professor",shilpi.saha@heritageit.edu
-CHE01,"Prof. (Dr.) Anadyalok Audhya","AA","Chemistry","HOD","anadyalok.audhya@heritageit.edu
-CHE02,"Prof. (Dr.) Piyali Paul","PP","Chemistry","Assistant Professor",piyali.paul@heritageit.edu
+AML01,"Prof. (Dr.) Sujay Saha","SJS","AIML","HOD",sujay.saha@heritageit.edu
+AML02,"Prof. (Dr.) Mohuya Byabartta Kar","MBK","AIML","Associate Professor",mohuya.byabartta@heritageit.edu
+AML03,"Prof. (Dr.) Ritankar Mandal","RM","AIML","Assistant Professor",ritankar.mandal@heritageit.edu
+AML04,"Prof. Pratik Kumar Haldar","PKH","AIML","Assistant Professor",pratik.kumarhaldar@heritageit.edu
+AML05,"Mr. Arunava Sengupta","ASG","AIML","Technical Assistant",arunava.sengupta@heritageit.edu
+AML06,"Ms. Shubhangini Dey","SDD","AIML","Technical Assistant",shubhangini.dey@heritageit.edu
+DSC01,"Prof. (Dr.) Subhajit Datta","SD","DSC","HOD",subhajit.datta@heritageit.edu
+DSC02,"Prof. (Dr.) Nilina Bera","NB","DSC","Assistant Professor",nilina.bera@heritageit.edu
+DSC03,"Prof. Arpita Talukdar","AT","DSC","Assistant Professor",arpita.talukdar@heritageit.edu
+DSC04,"Prof. Deblina Chowdhury","DC","DSC","Assistant Professor",deblina.chowdhury@heritageit.edu
+DSC05,"Mr. Srijit Talukdar","ST","DSC","Technical Assistant",srijit.talukdar@heritageit.edu
+DSC06,"Ms. Tithi Dutta","TD","DSC","Technical Assistant",tithi.dutta@heritageit.edu
+CSE01,"Prof. (Dr.) Aritra Saha","AS","CSE","Assistant Professor",aritra.saha@heritageit.edu
+CSE02,"Prof. (Dr.) Sabyasachi Banerjee","SB","CSE","Assistant Professor",sabyasachi.banerjee@heritageit.edu
+CSE04,"Prof. (Dr.) Shilpi Saha","SS","CSE","Assistant Professor",shilpi.saha@heritageit.edu
+CHE01,"Prof. (Dr.) Anadyalok Audhya","AA","CHE","HOD",anadyalok.audhya@heritageit.edu
+CHE02,"Prof. (Dr.) Piyali Paul","PP","CHE","Assistant Professor",piyali.paul@heritageit.edu
 ECE01,"Prof. (Dr.)Shounak Dasgupta","SDG","ECE","HOD",shounak.dasgupta@heritageit.edu
 ECE02,"Prof. (Dr.)Soumyo Chatterjee","SC","ECE","Associate Professor",soumyo.chatterjee@heritageit.edu
 ECE03,"Prof. (Dr.)Tania Das","AC","ECE","Assistant Professor",tania.das@heritageit.edu
-MTH01,"Prof. (Dr.)Sandip Chatterjee","SCT","Mathematics","HOD",sandip.chatterjee@heritageit.edu
-MTH02,"Prof. (Dr.) Somjit Datta","SD","Mathematics","Associate Professor",somjit.datta@heritageit.edu
+MTH01,"Prof. (Dr.)Sandip Chatterjee","SCT","MTH","HOD",sandip.chatterjee@heritageit.edu
+MTH02,"Prof. (Dr.) Somjit Datta","SD","MTH","Associate Professor",somjit.datta@heritageit.edu
